@@ -157,8 +157,63 @@
   .gate-input.invalid{border-bottom-color:var(--coral)}
   .gate-input.invalid::placeholder{color:rgba(255,74,28,.5)}
 
-  /* opt click flash */
+  /* opt click flash + touch active feedback (mobile lacks hover) */
   .opt.flash{ background:rgba(207,255,55,.4) !important; transform:translateX(2px) }
+  .opt:active{ background:rgba(207,255,55,.22); transform:translateX(4px) }
+
+  /* hover tilt on manifesto stat blocks */
+  .stat-tilt{transition:transform .45s cubic-bezier(.16,1,.3,1)}
+  .stat-tilt:hover{transform:rotate(-1.2deg) translateY(-6px)}
+  .stat-tilt:nth-child(2):hover{transform:rotate(.9deg) translateY(-6px)}
+  .stat-tilt:nth-child(3):hover{transform:rotate(-.6deg) translateY(-6px)}
+
+  /* FAQ smooth-open — animates the body when the details opens */
+  details summary{transition:color .25s}
+  details:hover summary{color:var(--coral)}
+  .ink-bg details:hover summary{color:var(--acid)}
+  details[open] > *:not(summary){animation:faqIn .4s cubic-bezier(.16,1,.3,1)}
+  @keyframes faqIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+  /* MOBILE CYCLE — vertical list alternative to the SVG figure */
+  .cycle-mobile-step{position:relative;padding-left:2.25rem;padding-bottom:1.6rem}
+  .cycle-mobile-step::before{content:"";position:absolute;left:11px;top:24px;bottom:0;width:1px;background:rgba(13,13,10,.18)}
+  .cycle-mobile-step:last-child::before{display:none}
+  .cycle-mobile-step.coral::before{background:rgba(255,74,28,.4);background-image:repeating-linear-gradient(0deg,rgba(255,74,28,.55) 0 4px,transparent 4px 8px)}
+  .cycle-mobile-num{
+    position:absolute;left:0;top:0;
+    width:24px;height:24px;border-radius:99px;
+    background:var(--paper);border:1.5px solid currentColor;
+    font-family:'JetBrains Mono';font-size:10px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .cycle-mobile-annot{
+    display:inline-block;margin-top:.6rem;
+    font-family:'Instrument Serif',serif;font-style:italic;font-size:.95rem;
+    color:#4a4a3d;
+  }
+
+  /* MOBILE OVERRIDES */
+  @media (max-width:767px){
+    h1.display{font-size:clamp(2.5rem,8.8vw,11rem) !important;line-height:.92}
+    .opt{padding:.85rem 1rem}
+    .opt .lbl{font-size:.98rem;line-height:1.32}
+    .editorial-grid > *{padding:0 !important}
+    /* manifesto stats: rhythmic horizontal offset instead of pt offset */
+    #manifesto .stat-tilt:nth-child(2){margin-left:10%}
+    #manifesto .stat-tilt:nth-child(3){margin-left:22%}
+    #manifesto .stat-tilt[data-pt]{padding-top:0 !important}
+    /* score reduce */
+    .score-display{font-size:clamp(6.5rem,28vw,17rem) !important}
+    /* hero CTA stack */
+    .editorial-grid .btn-acid,.editorial-grid .btn-line{width:100%;justify-content:center}
+    /* footer ticker font */
+    .marquee{font-size:1.6rem !important}
+    /* gate inputs */
+    .gate-input{font-size:1rem;padding:.7rem 0}
+    /* details padding tighter */
+    details{padding-top:1rem !important;padding-bottom:1rem !important}
+    details summary{font-size:1.1rem !important}
+  }
 
   @media (prefers-reduced-motion:reduce){
     *{animation-duration:.01ms!important;transition-duration:.01ms!important}
@@ -306,21 +361,21 @@
     <!-- asymm stats: numbers as artwork -->
     <div class="grid grid-cols-12 gap-x-6 gap-y-12">
 
-      <div class="col-span-12 md:col-span-5">
+      <div class="col-span-12 md:col-span-5 stat-tilt">
         <div class="num-serif" style="font-size:clamp(7rem,14vw,12rem);color:var(--acid);font-weight:200">40<span style="color:rgba(236,228,207,.4)">—</span>60<span class="text-3xl align-top">%</span></div>
         <div class="rule-paper my-3" style="background:rgba(236,228,207,.3)"></div>
         <p class="text-sm" style="color:rgba(236,228,207,.75)">de margem extra que o lojista captura
         ao lançar marca própria sobre o mesmo SKU industrial.</p>
       </div>
 
-      <div class="col-span-12 md:col-span-4 md:pt-16">
+      <div class="col-span-12 md:col-span-4 md:pt-16 stat-tilt" data-pt="1">
         <div class="num-serif" style="font-size:clamp(5rem,10vw,8rem);color:var(--coral);font-weight:200">~70<span class="text-2xl">%</span></div>
         <div class="rule-paper my-3" style="background:rgba(236,228,207,.3)"></div>
         <p class="text-sm" style="color:rgba(236,228,207,.75)">do GMV digital de muitas indústrias
         B2B acontece <em>fora</em> do controle delas.</p>
       </div>
 
-      <div class="col-span-12 md:col-span-3 md:pt-32">
+      <div class="col-span-12 md:col-span-3 md:pt-32 stat-tilt" data-pt="2">
         <div class="num-serif" style="font-size:clamp(5rem,10vw,8rem);color:var(--on-ink);font-weight:200">0</div>
         <div class="rule-paper my-3" style="background:rgba(236,228,207,.3)"></div>
         <p class="text-sm" style="color:rgba(236,228,207,.75)">é o número de dados de consumidor
@@ -369,8 +424,8 @@
       </div>
     </div>
 
-    <!-- the figure: SVG infographic w/ arrows that connect to node positions -->
-    <div class="loop-fig" id="loopFig">
+    <!-- the figure: SVG infographic w/ arrows that connect to node positions (DESKTOP) -->
+    <div class="loop-fig hidden md:block" id="loopFig">
       <svg id="loopSvg" viewBox="0 0 1200 720" preserveAspectRatio="xMidYMid meet" class="absolute inset-0 w-full h-full">
         <defs>
           <marker id="arrBlack" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
@@ -460,6 +515,66 @@
         <div class="node-tag" style="color:var(--coral)">06 / perda</div>
         <div class="serif text-2xl md:text-3xl mt-1" style="letter-spacing:-.02em">Indústria</div>
         <div class="annot mt-1" style="color:#4a4a3d">perde share,<br/>sem nem saber</div>
+      </div>
+    </div>
+
+    <!-- MOBILE — vertical step list alternative to the SVG cycle -->
+    <ol class="md:hidden mt-2">
+      <li class="cycle-mobile-step" style="color:var(--cobalt)">
+        <span class="cycle-mobile-num">01</span>
+        <div class="caption" style="color:var(--cobalt)">ORIGEM</div>
+        <div class="serif text-2xl mt-1" style="letter-spacing:-.02em;color:var(--ink)">Indústria</div>
+        <div class="annot mt-1" style="color:#4a4a3d">vende a granel, cega para o destino final</div>
+        <span class="cycle-mobile-annot">↳ venda em escala</span>
+      </li>
+      <li class="cycle-mobile-step" style="color:var(--cobalt)">
+        <span class="cycle-mobile-num">02</span>
+        <div class="caption" style="color:var(--cobalt)">CAPILARIDADE</div>
+        <div class="serif text-2xl mt-1" style="letter-spacing:-.02em;color:var(--ink)">Distribuidor</div>
+        <div class="annot mt-1" style="color:#4a4a3d">capilariza por região</div>
+        <span class="cycle-mobile-annot">↳ capilaridade regional</span>
+      </li>
+      <li class="cycle-mobile-step" style="color:var(--cobalt)">
+        <span class="cycle-mobile-num">03</span>
+        <div class="caption" style="color:var(--cobalt)">CONTATO</div>
+        <div class="serif text-2xl mt-1" style="letter-spacing:-.02em;color:var(--ink)">Lojista</div>
+        <div class="annot mt-1" style="color:#4a4a3d">vê o consumidor, captura o dado</div>
+        <span class="cycle-mobile-annot" style="color:var(--coral)">↳ MARGEM DESCOBERTA</span>
+      </li>
+      <li class="cycle-mobile-step coral" style="color:var(--coral)">
+        <span class="cycle-mobile-num">04</span>
+        <div class="caption" style="color:var(--coral)">VIRADA</div>
+        <div class="serif text-2xl mt-1" style="letter-spacing:-.02em;color:var(--ink)">Marca própria</div>
+        <div class="annot mt-1" style="color:#4a4a3d">mesmo SKU, +50% margem</div>
+        <span class="cycle-mobile-annot" style="color:var(--coral)">↳ −15% pedidos</span>
+      </li>
+      <li class="cycle-mobile-step coral" style="color:var(--coral)">
+        <span class="cycle-mobile-num">05</span>
+        <div class="caption" style="color:var(--coral)">CRESCIMENTO</div>
+        <div class="serif text-2xl mt-1" style="letter-spacing:-.02em;color:var(--ink)">Lojista cresce</div>
+        <div class="annot mt-1" style="color:#4a4a3d">deixa de comprar tanto</div>
+        <span class="cycle-mobile-annot" style="color:var(--coral)">↳ −25% share digital</span>
+      </li>
+      <li class="cycle-mobile-step coral" style="color:var(--coral)">
+        <span class="cycle-mobile-num">06</span>
+        <div class="caption" style="color:var(--coral)">PERDA</div>
+        <div class="serif text-2xl mt-1" style="letter-spacing:-.02em;color:var(--ink)">Indústria</div>
+        <div class="annot mt-1" style="color:#4a4a3d">perde share, sem nem saber</div>
+        <span class="cycle-mobile-annot" style="color:var(--coral)">↲ ciclo recomeça</span>
+      </li>
+    </ol>
+
+    <!-- MOBILE — center stats summary card -->
+    <div class="md:hidden mt-8 grid grid-cols-2 gap-4 py-6 border-t border-b" style="border-color:var(--rule)">
+      <div>
+        <div class="caption mb-2" style="color:#4a4a3d">MARGEM CAPTURADA</div>
+        <div class="num-serif" style="font-size:3.4rem;color:var(--coral);font-weight:200">+50%</div>
+        <div class="annot italic mt-1" style="color:#4a4a3d">pelo lojista que vira marca</div>
+      </div>
+      <div>
+        <div class="caption mb-2" style="color:#4a4a3d">SHARE EVAPORADO</div>
+        <div class="num-serif" style="font-size:3.4rem;color:var(--ink);font-weight:200">−40%</div>
+        <div class="annot italic mt-1" style="color:#4a4a3d">pela indústria, sem saber</div>
       </div>
     </div>
 
@@ -945,8 +1060,14 @@ cycleTl
   .to('#arc61', { strokeDashoffset: 0, duration: .45 }, 3.6)
   .to('#annot61', { opacity: 1, duration: .3 }, 3.95)
 
-  /* CENTER STATS reveal — the punchline */
-  .to('#centerStats', { opacity: 1, duration: .8, ease: 'power2.out' }, 4.2);
+  /* CENTER STATS reveal — sequential, the punchline */
+  .to('#centerStats', { opacity: 1, duration: .1 }, 4.2)
+  .from('#centerStats > text:nth-child(1)', { opacity: 0, y: 6, duration: .35, ease: 'power3.out' }, 4.25)
+  .from('#centerStats > text:nth-child(2)', { opacity: 0, scale: .9, transformOrigin: 'center', duration: .55, ease: 'back.out(1.4)' }, 4.4)
+  .from('#centerStats > text:nth-child(3)', { opacity: 0, y: 6, duration: .35, ease: 'power3.out' }, 4.65)
+  .from('#centerStats > text:nth-child(4)', { opacity: 0, y: 6, duration: .35, ease: 'power3.out' }, 4.85)
+  .from('#centerStats > text:nth-child(5)', { opacity: 0, scale: .9, transformOrigin: 'center', duration: .55, ease: 'back.out(1.4)' }, 5.0)
+  .from('#centerStats > text:nth-child(6)', { opacity: 0, y: 6, duration: .35, ease: 'power3.out' }, 5.25);
 
 /* hero -> ticker subtle scroll-driven acceleration */
 gsap.to('.marquee', {
