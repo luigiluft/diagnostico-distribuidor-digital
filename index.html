@@ -1,0 +1,1408 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Edição 01 — A Inversão Silenciosa · Agrega</title>
+<meta name="description" content="Quem tem o cliente, tem o poder. Um diagnóstico em 6 perguntas para indústrias e importadores." />
+
+<!-- Open Graph / LinkedIn / WhatsApp preview -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="A Inversão Silenciosa — Diagnóstico Distribuidor Digital" />
+<meta property="og:description" content="Sua marca é dona do cliente final ou só do produto? Em 6 perguntas, descubra onde sua marca está na curva da inversão. Para indústrias e importadores B2B." />
+<meta property="og:image" content="og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://diagnostico.agrega.com.br/" />
+<meta property="og:site_name" content="Agrega · Observatório do Canal" />
+<meta property="og:locale" content="pt_BR" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="A Inversão Silenciosa — Diagnóstico Distribuidor Digital" />
+<meta name="twitter:description" content="Sua marca é dona do cliente final ou só do produto? Em 6 perguntas. Para indústrias B2B." />
+<meta name="twitter:image" content="og-image.png" />
+
+<meta name="theme-color" content="#0d0d0a" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script>
+
+<style>
+  :root{
+    --paper:#efe9da;
+    --paper-deep:#e6dec8;
+    --ink:#0d0d0a;
+    --ink-2:#1a1a14;
+    --on-ink:#ece4cf;
+    --rule:#1b1b14;
+    --rule-paper:#1a1a14;
+    --acid:#cfff37;
+    --coral:#ff4a1c;
+    --cobalt:#1c34ff;
+    --plum:#8e2bff;
+  }
+  *{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  html,body{background:var(--paper);color:var(--ink);overflow-x:hidden}
+  .serif{font-family:'Fraunces',serif;font-feature-settings:"ss01","ss02","ss03"}
+  .serif-i{font-family:'Instrument Serif',serif}
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+
+  /* paper grain */
+  body::before{
+    content:"";position:fixed;inset:-50%;pointer-events:none;z-index:1;opacity:.35;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .14 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  .ink-grain::before{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'><filter id='n2'><feTurbulence type='fractalNoise' baseFrequency='2.2' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n2)'/></svg>");
+  }
+
+  .ink-bg{background:var(--ink);color:var(--on-ink);position:relative}
+
+  .rule{height:1px;background:var(--rule)}
+  .rule-paper{height:1px;background:var(--rule-paper)}
+  .double-rule{border-top:1px solid currentColor;border-bottom:3px solid currentColor;padding:.5rem 0}
+
+  .display{font-family:'Fraunces',serif;font-weight:300;font-variation-settings:"opsz" 144,"SOFT" 100;letter-spacing:-.045em;line-height:.86}
+  .display-tight{line-height:.78}
+
+  .dateline{font-family:'JetBrains Mono';font-size:.7rem;letter-spacing:.22em;text-transform:uppercase}
+  .caption{font-family:'JetBrains Mono';font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:#6a6a55}
+
+  .num-mono{font-family:'JetBrains Mono';font-weight:700;font-feature-settings:"tnum"}
+  .num-serif{font-family:'Fraunces',serif;font-weight:300;font-variation-settings:"opsz" 144;letter-spacing:-.06em;line-height:.78}
+
+  .stamp{display:inline-flex;align-items:center;gap:.4rem;border:1.5px solid currentColor;padding:.25rem .55rem;border-radius:2px;font-family:'JetBrains Mono';font-size:.62rem;letter-spacing:.22em;text-transform:uppercase}
+
+  /* drop cap */
+  .dropcap::first-letter{
+    font-family:'Fraunces',serif;font-weight:300;float:left;font-size:8.5em;line-height:.78;
+    margin:.04em .12em -.08em -.04em;color:var(--acid);letter-spacing:-.05em;
+    font-variation-settings:"opsz" 144,"SOFT" 100;
+  }
+
+  .pull{font-family:'Instrument Serif',serif;font-style:italic;line-height:1;letter-spacing:-.02em}
+
+  /* asymm grid */
+  .editorial-grid{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:0;column-gap:2.5rem}
+  @media(max-width:900px){.editorial-grid{grid-template-columns:1fr;gap:1.5rem}}
+
+  /* loop / cycle infographic */
+  .loop-fig{position:relative;aspect-ratio:5/3;background:var(--paper-deep);border-top:1px solid var(--rule);border-bottom:3px solid var(--rule);overflow:hidden}
+  .node-tag{font-family:'JetBrains Mono';font-size:.7rem;letter-spacing:.15em;text-transform:uppercase}
+  .annot{font-family:'Instrument Serif',serif;font-style:italic;font-size:.95rem;line-height:1.15}
+
+  /* buttons */
+  .btn-acid{display:inline-flex;align-items:center;gap:.6rem;background:var(--ink);color:var(--acid);padding:1.05rem 1.4rem;font-weight:700;letter-spacing:-.01em;border:1px solid var(--ink);transition:all .25s}
+  .btn-acid:hover{background:var(--acid);color:var(--ink);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn-line{display:inline-flex;align-items:center;gap:.6rem;border:1px solid currentColor;padding:1.05rem 1.4rem;font-weight:600;transition:all .2s}
+  .btn-line:hover{background:currentColor;color:var(--paper)}
+  .ink-bg .btn-line:hover{color:var(--ink)}
+
+  /* ticker */
+  .marquee{display:flex;gap:0;white-space:nowrap;animation:mq 38s linear infinite}
+  @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .marquee > span{display:inline-flex;align-items:center;gap:1.25rem;padding:0 1.25rem}
+
+  /* quiz */
+  .quiz-stage{position:relative;min-height:480px}
+  .qcard{position:absolute;inset:0;opacity:0;pointer-events:none;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
+  .qcard.active{opacity:1;pointer-events:auto;transform:translateY(0)}
+
+  .opt{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.2rem;background:transparent;border-top:1px solid rgba(236,228,207,.16);cursor:pointer;transition:all .2s ease;text-align:left;width:100%}
+  .opt:last-child{border-bottom:1px solid rgba(236,228,207,.16)}
+  .opt:hover{background:rgba(207,255,55,.08)}
+  .opt.selected{background:rgba(207,255,55,.14)}
+  .opt .key{font-family:'JetBrains Mono';font-size:.7rem;color:var(--acid);min-width:1.6rem}
+  .opt .lbl{font-size:1.05rem;line-height:1.35}
+
+  /* result bars */
+  .dim-row{display:grid;grid-template-columns:1.2fr 3fr auto;gap:1.5rem;align-items:center;padding:1.1rem 0;border-top:1px solid var(--rule)}
+  .dim-row:last-child{border-bottom:1px solid var(--rule)}
+  .bar-track{height:18px;background:transparent;border:1px solid var(--rule);position:relative;overflow:hidden}
+  .bar-fill{position:absolute;inset:0;background:repeating-linear-gradient(45deg,var(--ink) 0 6px,transparent 6px 12px);transform:scaleX(0);transform-origin:left;transition:transform 1.4s cubic-bezier(.16,1,.3,1)}
+
+  /* finding */
+  .finding{padding:1.5rem 0;border-top:1px solid var(--rule)}
+  .finding:last-child{border-bottom:1px solid var(--rule)}
+
+  /* score */
+  .score-display{font-family:'Fraunces',serif;font-weight:200;font-size:clamp(8rem,22vw,17rem);line-height:.8;letter-spacing:-.07em;font-variation-settings:"opsz" 144,"SOFT" 100}
+
+  /* link underline */
+  a.under{position:relative;display:inline-block}
+  a.under::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:currentColor;transform-origin:left;transition:transform .3s}
+  a.under:hover::after{transform:scaleX(1.05)}
+
+  details summary{list-style:none;cursor:pointer}
+  details summary::-webkit-details-marker{display:none}
+
+  /* gate inputs */
+  .gate-input{
+    width:100%;background:transparent;color:var(--on-ink);border:none;border-bottom:1px solid rgba(236,228,207,.22);
+    padding:.85rem 0;font-size:1.1rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .25s, color .25s;
+    border-radius:0;
+  }
+  .gate-input::placeholder{color:rgba(236,228,207,.28);font-style:italic;font-family:'Instrument Serif',serif;font-size:1.05rem}
+  .gate-input:focus{border-bottom-color:var(--acid)}
+  .gate-input.invalid{border-bottom-color:var(--coral)}
+  .gate-input.invalid::placeholder{color:rgba(255,74,28,.5)}
+
+  /* opt click flash */
+  .opt.flash{ background:rgba(207,255,55,.4) !important; transform:translateX(2px) }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== MASTHEAD ============== -->
+<header class="border-b" style="border-color:var(--rule)">
+  <div class="max-w-[1280px] mx-auto px-6 py-3 flex items-center justify-between text-xs">
+    <div class="dateline">06 Mai 2026 · São Paulo</div>
+    <div class="flex items-center gap-2 mono uppercase tracking-widest text-[.62rem]">
+      <span class="inline-block w-2 h-2" style="background:var(--coral)"></span>
+      Edição Piloto · Distribuição privada
+    </div>
+    <div class="dateline hidden md:block">Vol. I · Ed. 01</div>
+  </div>
+</header>
+
+<div class="border-b" style="border-color:var(--rule)">
+  <div class="max-w-[1280px] mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-baseline gap-3">
+      <span class="serif text-3xl md:text-4xl font-light italic" style="letter-spacing:-.04em">agrega</span>
+      <span class="caption">— observatório do canal</span>
+    </div>
+    <a href="#diagnostico" class="hidden md:inline mono text-xs tracking-widest uppercase under">Ir para o diagnóstico ↘</a>
+  </div>
+</div>
+
+<!-- ============== HERO EDITORIAL ============== -->
+<section class="relative">
+  <div class="max-w-[1280px] mx-auto px-6">
+
+    <!-- top label row -->
+    <div class="grid grid-cols-12 gap-6 pt-8 pb-4 items-end">
+      <div class="col-span-12 md:col-span-2">
+        <div class="num-serif" style="font-size:clamp(5rem,9vw,8.5rem);color:var(--coral)">01</div>
+        <div class="caption mt-2">Capítulo</div>
+      </div>
+      <div class="col-span-12 md:col-span-7">
+        <div class="caption mb-3">Reportagem · Diagnóstico</div>
+        <div class="double-rule mono text-xs uppercase tracking-widest" style="border-color:var(--ink)">
+          A inversão silenciosa do varejo brasileiro
+        </div>
+      </div>
+      <div class="col-span-12 md:col-span-3 flex md:justify-end">
+        <span class="stamp">90 segundos · 6 perguntas</span>
+      </div>
+    </div>
+
+    <!-- monumental headline -->
+    <h1 class="display display-tight pt-6 pb-10" style="font-size:clamp(3.4rem,11vw,11rem)">
+      Sua marca é dona<br/>
+      <span class="serif-i italic" style="font-weight:400;color:var(--coral)">do cliente</span>—<br/>
+      <span style="display:inline-block;background:var(--ink);color:var(--acid);padding:0 .15em;line-height:.95">ou só</span>
+      <span class="serif-i italic" style="font-weight:400">do produto?</span>
+    </h1>
+
+    <div class="rule mb-10" style="height:3px"></div>
+
+    <!-- sub-deck row : asymmetric three column -->
+    <div class="editorial-grid pb-12">
+      <div class="text-xs leading-relaxed">
+        <div class="caption mb-3" style="color:var(--ink)">Por dentro</div>
+        <p>Toda indústria que vende via revenda está numa engrenagem que comoditiza
+        a si mesma. Distribuidor capilariza, lojista atende — e descobre que o consumidor
+        é dele.</p>
+      </div>
+      <div>
+        <p class="serif font-light text-2xl md:text-[1.7rem] leading-snug" style="letter-spacing:-.02em">
+          Em <em class="serif-i" style="font-weight:400">seis perguntas</em>, a Agrega mede
+          o quanto da sua marca já saiu da sua mesa — e o quanto ainda dá pra recuperar
+          sem queimar o canal.
+        </p>
+        <div class="flex flex-wrap gap-3 mt-7">
+          <a href="#diagnostico" class="btn-acid">
+            <span>Iniciar o diagnóstico</span>
+            <span class="num-mono text-sm">→</span>
+          </a>
+          <a href="#manifesto" class="btn-line">Ler a tese antes</a>
+        </div>
+      </div>
+      <div>
+        <div class="caption mb-3" style="color:var(--ink)">A peça</div>
+        <p class="text-xs leading-relaxed">Este diagnóstico não vende
+        software. Vende <em>visibilidade</em>: o quanto do GMV digital da sua marca
+        acontece sem você ver — e quem está lucrando com isso.</p>
+        <div class="rule mt-6 mb-3"></div>
+        <p class="caption" style="color:var(--ink)">Dist. interna · 2026 · BR</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ticker w/ heavy treatment -->
+  <div class="border-y overflow-hidden" style="border-color:var(--rule);background:var(--paper-deep)">
+    <div class="marquee py-5 serif text-3xl md:text-5xl italic font-light" style="letter-spacing:-.03em">
+      <span>cosméticos<span style="color:var(--coral)">●</span></span>
+      <span>livraria didática<span style="color:var(--coral)">●</span></span>
+      <span>seminários teológicos<span style="color:var(--coral)">●</span></span>
+      <span>linha branca<span style="color:var(--coral)">●</span></span>
+      <span>ferramentas<span style="color:var(--coral)">●</span></span>
+      <span>nutricional<span style="color:var(--coral)">●</span></span>
+      <span>auto peças<span style="color:var(--coral)">●</span></span>
+      <span>tinta industrial<span style="color:var(--coral)">●</span></span>
+      <span>cosméticos<span style="color:var(--coral)">●</span></span>
+      <span>livraria didática<span style="color:var(--coral)">●</span></span>
+      <span>seminários teológicos<span style="color:var(--coral)">●</span></span>
+      <span>linha branca<span style="color:var(--coral)">●</span></span>
+      <span>ferramentas<span style="color:var(--coral)">●</span></span>
+      <span>nutricional<span style="color:var(--coral)">●</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============== MANIFESTO ============== -->
+<section id="manifesto" class="ink-bg relative py-20 md:py-32">
+  <div class="ink-grain"></div>
+  <div class="max-w-[1180px] mx-auto px-6 relative">
+
+    <div class="grid grid-cols-12 gap-6 mb-16 items-end">
+      <div class="col-span-12 md:col-span-5">
+        <div class="caption" style="color:var(--acid)">A tese</div>
+        <h2 class="display pt-3" style="font-size:clamp(2.4rem,6.5vw,5.5rem);color:var(--on-ink)">
+          Quem tem o cliente,<br/>
+          <span style="color:var(--acid)">tem o poder.</span>
+        </h2>
+      </div>
+      <div class="col-span-12 md:col-span-6 md:col-start-7">
+        <p class="text-sm md:text-base leading-relaxed dropcap" style="color:rgba(236,228,207,.85)">
+          O varejo brasileiro está se invertendo em silêncio. Lojistas que tocam
+          o consumidor final descobriram que podem capturar 40 a 60 por cento de
+          margem extra ao virar marca própria sobre o mesmo SKU que sempre venderam.
+          A indústria que sustentou esse lojista por décadas vira commodity intercambiável
+          — comoditizada pelo próprio canal que ela alimentou. O dado de quem compra,
+          quanto, quando e por quê <em class="serif-i not-italic" style="font-style:italic">nunca chegou</em>
+          até a fábrica. Agora chega menos ainda.
+        </p>
+      </div>
+    </div>
+
+    <div class="rule-paper mb-12" style="background:rgba(236,228,207,.18);height:1px"></div>
+
+    <!-- asymm stats: numbers as artwork -->
+    <div class="grid grid-cols-12 gap-x-6 gap-y-12">
+
+      <div class="col-span-12 md:col-span-5">
+        <div class="num-serif" style="font-size:clamp(7rem,14vw,12rem);color:var(--acid);font-weight:200">40<span style="color:rgba(236,228,207,.4)">—</span>60<span class="text-3xl align-top">%</span></div>
+        <div class="rule-paper my-3" style="background:rgba(236,228,207,.3)"></div>
+        <p class="text-sm" style="color:rgba(236,228,207,.75)">de margem extra que o lojista captura
+        ao lançar marca própria sobre o mesmo SKU industrial.</p>
+      </div>
+
+      <div class="col-span-12 md:col-span-4 md:pt-16">
+        <div class="num-serif" style="font-size:clamp(5rem,10vw,8rem);color:var(--coral);font-weight:200">~70<span class="text-2xl">%</span></div>
+        <div class="rule-paper my-3" style="background:rgba(236,228,207,.3)"></div>
+        <p class="text-sm" style="color:rgba(236,228,207,.75)">do GMV digital de muitas indústrias
+        B2B acontece <em>fora</em> do controle delas.</p>
+      </div>
+
+      <div class="col-span-12 md:col-span-3 md:pt-32">
+        <div class="num-serif" style="font-size:clamp(5rem,10vw,8rem);color:var(--on-ink);font-weight:200">0</div>
+        <div class="rule-paper my-3" style="background:rgba(236,228,207,.3)"></div>
+        <p class="text-sm" style="color:rgba(236,228,207,.75)">é o número de dados de consumidor
+        final que a maioria das indústrias possui sobre quem realmente compra.</p>
+      </div>
+    </div>
+
+    <div class="rule-paper my-16" style="background:rgba(236,228,207,.18);height:1px"></div>
+
+    <!-- pull quote, oversized, italic -->
+    <blockquote class="grid grid-cols-12 gap-6 items-start">
+      <div class="col-span-12 md:col-span-1 md:pt-2">
+        <span class="serif" style="font-size:8rem;line-height:.5;color:var(--acid);font-weight:200">"</span>
+      </div>
+      <div class="col-span-12 md:col-span-10">
+        <p class="pull text-3xl md:text-[3.4rem]" style="color:var(--on-ink)">
+          A indústria que vendeu pelas últimas três décadas via revenda agora precisa reentrar no consumidor final
+          <span style="color:var(--acid)">sem queimar o canal</span> que ainda paga as contas. Esse é o problema real.
+        </p>
+        <div class="rule-paper mt-8 mb-3" style="background:rgba(236,228,207,.3)"></div>
+        <p class="caption" style="color:rgba(236,228,207,.5)">Tese editorial · Agrega · 2026</p>
+      </div>
+    </blockquote>
+
+  </div>
+</section>
+
+<!-- ============== THE LOOP / FIGURE ============== -->
+<section class="py-20 md:py-28">
+  <div class="max-w-[1280px] mx-auto px-6">
+
+    <div class="grid grid-cols-12 gap-6 mb-10 items-end">
+      <div class="col-span-12 md:col-span-2">
+        <div class="num-serif" style="font-size:clamp(4rem,7vw,6rem);color:var(--cobalt)">02</div>
+        <div class="caption mt-1">Capítulo</div>
+      </div>
+      <div class="col-span-12 md:col-span-7">
+        <div class="caption mb-2">Figura · O ciclo</div>
+        <h2 class="display" style="font-size:clamp(2.2rem,5.5vw,4.5rem)">
+          Como uma indústria<br/>vira commodity em <em class="serif-i" style="font-weight:400;color:var(--coral)">seis passos</em>.
+        </h2>
+      </div>
+      <div class="col-span-12 md:col-span-3">
+        <p class="text-sm" style="color:#4a4a3d">Cada rodada do ciclo aproxima a marca
+        de virar substituível e afasta a indústria do consumidor.</p>
+      </div>
+    </div>
+
+    <!-- the figure: SVG infographic w/ arrows that connect to node positions -->
+    <div class="loop-fig" id="loopFig">
+      <svg id="loopSvg" viewBox="0 0 1200 720" preserveAspectRatio="xMidYMid meet" class="absolute inset-0 w-full h-full">
+        <defs>
+          <marker id="arrBlack" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L7,3 z" fill="#0d0d0a"/>
+          </marker>
+          <marker id="arrCoral" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L7,3 z" fill="#ff4a1c"/>
+          </marker>
+        </defs>
+
+        <!-- ghost ellipse, hint of the cycle -->
+        <ellipse cx="600" cy="360" rx="540" ry="270" fill="none" stroke="#1a1a14" stroke-width=".5" stroke-dasharray="2 6" opacity=".12"/>
+
+        <!-- ARCS — top row (legitimate flow) -->
+        <path id="arc12" class="cycle-arc" d="M 168 188 Q 380 95 572 110" fill="none" stroke="#0d0d0a" stroke-width="1.6" marker-end="url(#arrBlack)"/>
+        <path id="arc23" class="cycle-arc" d="M 628 110 Q 820 95 1032 188" fill="none" stroke="#0d0d0a" stroke-width="1.6" marker-end="url(#arrBlack)"/>
+        <!-- pivot down -->
+        <path id="arc34" class="cycle-arc" d="M 1060 230 L 1060 488" fill="none" stroke="#0d0d0a" stroke-width="1.6" marker-end="url(#arrBlack)"/>
+        <!-- ARCS — bottom row (silent leak) -->
+        <path id="arc45" class="cycle-arc cycle-leak" d="M 1032 533 Q 820 627 628 612" fill="none" stroke="#ff4a1c" stroke-width="1.6" marker-end="url(#arrCoral)" stroke-dasharray="6 4"/>
+        <path id="arc56" class="cycle-arc cycle-leak" d="M 572 612 Q 380 627 168 533" fill="none" stroke="#ff4a1c" stroke-width="1.6" marker-end="url(#arrCoral)" stroke-dasharray="6 4"/>
+        <!-- closing -->
+        <path id="arc61" class="cycle-arc cycle-leak" d="M 140 488 L 140 232" fill="none" stroke="#ff4a1c" stroke-width="1.6" marker-end="url(#arrCoral)" stroke-dasharray="6 4"/>
+
+        <!-- arrow annotations (italic editorial) -->
+        <text id="annot12" x="370" y="78" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="14" fill="#0d0d0a" opacity="0">venda em escala</text>
+        <text id="annot23" x="830" y="78" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="14" fill="#0d0d0a" opacity="0">capilaridade regional</text>
+        <!-- vertical labels rotated 90° so they fit alongside the vertical pivot/return arrows -->
+        <text id="annot34" x="1085" y="360" text-anchor="middle" transform="rotate(90 1085 360)" font-family="JetBrains Mono" font-size="10" letter-spacing="2.5" fill="#ff4a1c" opacity="0">↳ MARGEM DESCOBERTA</text>
+        <text id="annot45" x="830" y="664" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="14" fill="#ff4a1c" opacity="0">−15% pedidos</text>
+        <text id="annot56" x="370" y="664" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="14" fill="#ff4a1c" opacity="0">−25% share digital</text>
+        <text id="annot61" x="115" y="360" text-anchor="middle" transform="rotate(-90 115 360)" font-family="JetBrains Mono" font-size="10" letter-spacing="2.5" fill="#ff4a1c" opacity="0">↲ CICLO RECOMEÇA</text>
+
+        <!-- CENTER STATS — fill the void with the actual story -->
+        <g id="centerStats" opacity="0">
+          <!-- left side: margin captured -->
+          <text x="345" y="300" text-anchor="middle" font-family="Fraunces" font-weight="200" font-size="86" fill="#ff4a1c" letter-spacing="-3" font-variation-settings="'opsz' 144,'SOFT' 100">+50%</text>
+          <text x="345" y="325" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" letter-spacing="2" fill="#4a4a3d">MARGEM CAPTURADA</text>
+          <text x="345" y="345" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="13" fill="#4a4a3d">pelo lojista que vira marca</text>
+
+          <!-- divider line -->
+          <line x1="500" y1="360" x2="700" y2="360" stroke="#1a1a14" stroke-width=".5" opacity=".25"/>
+
+          <!-- right side: share lost -->
+          <text x="855" y="430" text-anchor="middle" font-family="Fraunces" font-weight="200" font-size="86" fill="#0d0d0a" letter-spacing="-3" font-variation-settings="'opsz' 144,'SOFT' 100">−40%</text>
+          <text x="855" y="395" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" letter-spacing="2" fill="#4a4a3d">SHARE EVAPORADO</text>
+          <text x="855" y="450" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="13" fill="#4a4a3d">pela indústria, sem nem saber</text>
+
+          <!-- diagonal connecting line from "+50%" to "−40%" -->
+          <line x1="395" y1="320" x2="805" y2="408" stroke="#ff4a1c" stroke-width=".6" stroke-dasharray="2 4" opacity=".4"/>
+        </g>
+
+        <!-- central legend -->
+        <text id="lblFlow" x="600" y="345" text-anchor="middle" font-family="JetBrains Mono" font-size="11" letter-spacing="3" fill="#0d0d0a" opacity="0">FLUXO LEGÍTIMO →</text>
+        <text id="lblLeak" x="600" y="395" text-anchor="middle" font-family="JetBrains Mono" font-size="11" letter-spacing="3" fill="#ff4a1c" opacity="0">← VAZAMENTO SILENCIOSO</text>
+
+        <!-- node dots: anchors for the arrows. Each arrow ends near these -->
+        <circle class="node-dot" data-i="0" cx="140" cy="200" r="6" fill="#1c34ff" opacity="0"/>
+        <circle class="node-dot" data-i="1" cx="600" cy="110" r="5" fill="#0d0d0a" opacity="0"/>
+        <circle class="node-dot" data-i="2" cx="1060" cy="200" r="6" fill="#1c34ff" opacity="0"/>
+        <circle class="node-dot" data-i="3" cx="1060" cy="520" r="6" fill="#ff4a1c" opacity="0"/>
+        <circle class="node-dot" data-i="4" cx="600" cy="610" r="5" fill="#ff4a1c" opacity="0"/>
+        <circle class="node-dot" data-i="5" cx="140" cy="520" r="6" fill="#ff4a1c" opacity="0"/>
+      </svg>
+
+      <!-- HTML labels — % positions calibrated to svg coords (viewBox 1200x720) -->
+      <div class="node-label" data-i="0" style="position:absolute;left:11.67%;top:27.78%;transform:translate(-50%,-118%);width:200px;text-align:center;opacity:0">
+        <div class="node-tag" style="color:var(--cobalt)">01 / origem</div>
+        <div class="serif text-2xl md:text-3xl mt-1" style="letter-spacing:-.02em">Indústria</div>
+        <div class="annot mt-1" style="color:#4a4a3d">vende a granel,<br/>cega para o destino final</div>
+      </div>
+      <div class="node-label hidden md:block" data-i="1" style="position:absolute;left:50%;top:15.28%;transform:translate(-50%,-118%);width:170px;text-align:center;opacity:0">
+        <div class="node-tag">02</div>
+        <div class="serif text-xl md:text-2xl mt-1" style="letter-spacing:-.02em">Distribuidor</div>
+        <div class="annot mt-1" style="color:#4a4a3d">capilariza por região</div>
+      </div>
+      <div class="node-label" data-i="2" style="position:absolute;left:88.33%;top:27.78%;transform:translate(-50%,-118%);width:200px;text-align:center;opacity:0">
+        <div class="node-tag" style="color:var(--cobalt)">03 / contato</div>
+        <div class="serif text-2xl md:text-3xl mt-1" style="letter-spacing:-.02em">Lojista</div>
+        <div class="annot mt-1" style="color:#4a4a3d">vê o consumidor,<br/>captura o dado</div>
+      </div>
+      <div class="node-label" data-i="3" style="position:absolute;left:88.33%;top:72.22%;transform:translate(-50%,18%);width:210px;text-align:center;opacity:0">
+        <div class="node-tag" style="color:var(--coral)">04 / virada</div>
+        <div class="serif text-2xl md:text-3xl mt-1" style="letter-spacing:-.02em">Marca própria</div>
+        <div class="annot mt-1" style="color:#4a4a3d">mesmo SKU, +50% margem</div>
+      </div>
+      <div class="node-label hidden md:block" data-i="4" style="position:absolute;left:50%;top:84.72%;transform:translate(-50%,18%);width:180px;text-align:center;opacity:0">
+        <div class="node-tag" style="color:var(--coral)">05</div>
+        <div class="serif text-xl md:text-2xl mt-1" style="letter-spacing:-.02em">Lojista cresce</div>
+        <div class="annot mt-1" style="color:#4a4a3d">deixa de comprar tanto</div>
+      </div>
+      <div class="node-label" data-i="5" style="position:absolute;left:11.67%;top:72.22%;transform:translate(-50%,18%);width:200px;text-align:center;opacity:0">
+        <div class="node-tag" style="color:var(--coral)">06 / perda</div>
+        <div class="serif text-2xl md:text-3xl mt-1" style="letter-spacing:-.02em">Indústria</div>
+        <div class="annot mt-1" style="color:#4a4a3d">perde share,<br/>sem nem saber</div>
+      </div>
+    </div>
+
+    <!-- caption strip -->
+    <div class="grid grid-cols-12 gap-6 mt-6 text-xs" style="color:#4a4a3d">
+      <div class="col-span-12 md:col-span-2 caption" style="color:var(--ink)">Fig. 01</div>
+      <div class="col-span-12 md:col-span-7">
+        Diagrama editorial · O ciclo da dependência industrial. Setas pretas representam
+        o fluxo legítimo de produto; tracejadas em vermelho, o vazamento silencioso de
+        margem e dado.
+      </div>
+      <div class="col-span-12 md:col-span-3 mono uppercase tracking-widest text-[.62rem]" style="color:var(--coral)">
+        ↳ Ciclo dura, em média, 18–36 meses
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== QUIZ ============== -->
+<section id="diagnostico" class="ink-bg py-20 md:py-28">
+  <div class="ink-grain"></div>
+  <div class="max-w-[920px] mx-auto px-6 relative">
+
+    <div class="grid grid-cols-12 gap-6 mb-12 items-end">
+      <div class="col-span-12 md:col-span-2">
+        <div class="num-serif" style="font-size:clamp(4rem,7vw,6rem);color:var(--acid)">03</div>
+        <div class="caption mt-1" style="color:var(--acid)">Capítulo</div>
+      </div>
+      <div class="col-span-12 md:col-span-10">
+        <div class="caption mb-2" style="color:rgba(236,228,207,.5)">O instrumento</div>
+        <h2 class="display" style="font-size:clamp(2rem,5vw,3.7rem);color:var(--on-ink)">
+          Onde sua marca está<br/>
+          na <em class="serif-i" style="font-weight:400;color:var(--acid)">curva da inversão</em>?
+        </h2>
+      </div>
+    </div>
+
+    <div class="rule-paper mb-3" style="background:rgba(236,228,207,.2)"></div>
+    <div class="flex items-center justify-between mono text-xs mb-8" style="color:rgba(236,228,207,.55)">
+      <span id="qIdx">PERGUNTA 01 / 06</span>
+      <span id="qHint">USE 1–4 NO TECLADO →</span>
+    </div>
+
+    <div class="quiz-stage" id="quizStage"></div>
+
+    <div class="flex items-center justify-between mt-10 pt-6" style="border-top:1px solid rgba(236,228,207,.2)">
+      <button id="qBack" class="mono text-xs uppercase tracking-widest under" style="color:rgba(236,228,207,.7)">← voltar</button>
+      <div class="flex items-center gap-3">
+        <span id="qProg" class="mono text-xs" style="color:rgba(236,228,207,.5)"></span>
+        <button id="qNext" class="btn-line" style="display:none;color:var(--acid);border-color:var(--acid);padding:.7rem 1.1rem">avançar →</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== GATE (lead capture) ============== -->
+<section id="gate" class="hidden ink-bg py-20 md:py-28">
+  <div class="ink-grain"></div>
+  <div class="max-w-[760px] mx-auto px-6 relative">
+
+    <div class="grid grid-cols-12 gap-6 mb-12 items-end">
+      <div class="col-span-12 md:col-span-2">
+        <div class="num-serif" style="font-size:clamp(4rem,7vw,6rem);color:var(--coral)">04</div>
+        <div class="caption mt-1" style="color:var(--coral)">Capítulo</div>
+      </div>
+      <div class="col-span-12 md:col-span-10">
+        <div class="caption mb-2" style="color:rgba(236,228,207,.5)">Veredito sob registro</div>
+        <h2 class="display" style="font-size:clamp(2rem,5vw,3.4rem);color:var(--on-ink)">
+          Antes de revelar,<br/>
+          <em class="serif-i" style="font-weight:400;color:var(--acid)">quem é você?</em>
+        </h2>
+      </div>
+    </div>
+
+    <p class="mb-12 text-base md:text-lg leading-relaxed max-w-xl serif-i italic" style="color:rgba(236,228,207,.7)">
+      Esse diagnóstico é privado. Mandamos seu veredito por email — e, se fizer sentido,
+      a Agrega entra em contato pra abrir o GMV digital da sua marca em 30 minutos.
+    </p>
+
+    <form id="gateForm" class="space-y-7" novalidate>
+
+      <div>
+        <label class="caption block mb-2" style="color:var(--acid)" for="gName">Nome</label>
+        <input id="gName" type="text" required placeholder="seu nome completo" class="gate-input" autocomplete="name" />
+      </div>
+
+      <div>
+        <label class="caption block mb-2" style="color:var(--acid)" for="gCompany">Empresa</label>
+        <input id="gCompany" type="text" required placeholder="razão social ou nome da marca" class="gate-input" autocomplete="organization" />
+      </div>
+
+      <div>
+        <label class="caption block mb-2" style="color:var(--acid)" for="gRole">Cargo</label>
+        <input id="gRole" type="text" required placeholder="diretor comercial · gerente de marketing · sócio" class="gate-input" autocomplete="organization-title" />
+      </div>
+
+      <div>
+        <label class="caption block mb-2" style="color:var(--acid)" for="gEmail">E-mail corporativo</label>
+        <input id="gEmail" type="email" required placeholder="voce@suaempresa.com.br" class="gate-input" autocomplete="email" />
+        <p id="gEmailHint" class="caption mt-2" style="color:rgba(236,228,207,.4)">SEM GMAIL/HOTMAIL — APENAS DOMÍNIOS CORPORATIVOS</p>
+      </div>
+
+      <div class="pt-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <button type="submit" class="btn-acid" style="background:var(--acid);color:var(--ink);border-color:var(--acid)">
+          revelar o veredito
+          <span>↗</span>
+        </button>
+        <span class="caption" style="color:rgba(236,228,207,.4)">Privacidade · Não compartilhamos com terceiros</span>
+      </div>
+
+    </form>
+
+  </div>
+</section>
+
+<!-- ============== RESULT ============== -->
+<section id="resultado" class="hidden relative py-20 md:py-28">
+  <div class="max-w-[1180px] mx-auto px-6">
+
+    <!-- cover header -->
+    <div class="grid grid-cols-12 gap-6 mb-10 items-end">
+      <div class="col-span-12 md:col-span-2">
+        <div class="num-serif" style="font-size:clamp(4rem,7vw,6rem);color:var(--coral)">04</div>
+        <div class="caption mt-1">Capítulo</div>
+      </div>
+      <div class="col-span-12 md:col-span-7">
+        <div class="caption mb-2">Veredito · Edição personalizada</div>
+        <h2 class="display" id="resultHeadline" style="font-size:clamp(2rem,5vw,3.7rem)">Você está...</h2>
+      </div>
+      <div class="col-span-12 md:col-span-3 md:text-right">
+        <div class="caption">Maturidade D2C</div>
+        <div class="serif text-2xl mt-1" id="scoreLabel" style="color:var(--coral)">—</div>
+      </div>
+    </div>
+
+    <div class="double-rule mono text-xs uppercase tracking-widest mb-12" style="border-color:var(--ink)">
+      Diagnóstico Distribuidor Digital · Edição 01 · 2026
+    </div>
+
+    <!-- score as cover -->
+    <div class="grid grid-cols-12 gap-6 mb-16 items-end">
+      <div class="col-span-12 md:col-span-7 relative">
+        <div class="caption mb-2">Pontuação</div>
+        <div class="score-display" id="scoreVal" style="color:var(--ink)">00</div>
+        <div class="absolute" style="right:0;top:18%">
+          <div class="serif text-3xl" style="color:#9b9b80;font-weight:300">/100</div>
+        </div>
+        <div class="rule mt-4"></div>
+        <div class="flex items-center justify-between mt-2 mono text-xs" style="color:#4a4a3d">
+          <span>0 · vulnerável</span>
+          <span>33</span>
+          <span>66</span>
+          <span>100 · maduro</span>
+        </div>
+      </div>
+      <div class="col-span-12 md:col-span-5">
+        <p class="serif text-xl md:text-2xl leading-snug" id="scoreNarrative" style="font-weight:300;letter-spacing:-.01em">
+          —
+        </p>
+      </div>
+    </div>
+
+    <!-- 5 dimensions as bars -->
+    <div class="grid grid-cols-12 gap-6 mb-16">
+      <div class="col-span-12 md:col-span-3">
+        <div class="caption mb-2">Cinco frentes</div>
+        <h3 class="serif text-3xl" style="font-weight:300;letter-spacing:-.02em">Onde sua marca <em class="serif-i" style="font-weight:400">vaza</em>.</h3>
+      </div>
+      <div class="col-span-12 md:col-span-9" id="dimList"></div>
+    </div>
+
+    <!-- findings -->
+    <div class="grid grid-cols-12 gap-6 mb-16">
+      <div class="col-span-12 md:col-span-3">
+        <div class="caption mb-2">Achados</div>
+        <h3 class="serif text-3xl" style="font-weight:300;letter-spacing:-.02em">Três movimentos <em class="serif-i" style="font-weight:400;color:var(--coral)">que cabem</em> na sua mesa.</h3>
+      </div>
+      <div class="col-span-12 md:col-span-9" id="recList"></div>
+    </div>
+
+    <!-- closing CTA: editorial colophon -->
+    <div class="ink-bg relative p-8 md:p-14" style="margin:0 -1.5rem">
+      <div class="ink-grain"></div>
+      <div class="relative grid grid-cols-12 gap-6 items-end">
+        <div class="col-span-12 md:col-span-7">
+          <div class="caption mb-3" style="color:var(--acid)">Próxima edição</div>
+          <h3 class="display" style="font-size:clamp(1.8rem,4.2vw,3rem);color:var(--on-ink)">
+            Trinta minutos.<br/>
+            <em class="serif-i" style="font-weight:400;color:var(--acid)">Um mapa</em> do seu canal.
+          </h3>
+          <p class="mt-5 max-w-md text-sm" style="color:rgba(236,228,207,.7)">
+            Você sai da conversa com 1 mapa de canais digitais, 1 estimativa de GMV
+            não-rastreado e 3 alavancas concretas para o trimestre.
+          </p>
+        </div>
+        <div class="col-span-12 md:col-span-5 flex flex-col gap-3 md:items-end">
+          <a id="ctaWhats" target="_blank" rel="noopener" class="btn-acid" style="background:var(--acid);color:var(--ink);border-color:var(--acid)">
+            agendar pelo whatsapp
+            <span>↗</span>
+          </a>
+          <button id="ctaCopy" class="btn-line text-sm" style="color:var(--on-ink);padding:.85rem 1.2rem">
+            <span id="ctaCopyText">copiar resumo do diagnóstico</span>
+          </button>
+          <span class="caption mt-2" style="color:rgba(236,228,207,.45)">resposta em até 4 horas úteis</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-12">
+      <button id="restart" class="mono text-xs uppercase tracking-widest under" style="color:#4a4a3d">↺ refazer diagnóstico</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== FAQ ============== -->
+<section class="py-20 border-t" style="border-color:var(--rule)">
+  <div class="max-w-[920px] mx-auto px-6">
+    <div class="grid grid-cols-12 gap-6 mb-10 items-end">
+      <div class="col-span-12 md:col-span-2">
+        <div class="num-serif" style="font-size:clamp(3.5rem,6vw,5rem);color:var(--plum)">05</div>
+        <div class="caption mt-1">Capítulo</div>
+      </div>
+      <div class="col-span-12 md:col-span-10">
+        <div class="caption mb-2">Notas de rodapé</div>
+        <h3 class="display" style="font-size:clamp(1.8rem,4.5vw,3rem)">
+          Perguntas que toda indústria faz <em class="serif-i" style="font-weight:400">primeiro</em>.
+        </h3>
+      </div>
+    </div>
+
+    <div>
+      <details class="border-t py-5" style="border-color:var(--rule)">
+        <summary class="flex items-center justify-between serif text-xl md:text-2xl" style="font-weight:400;letter-spacing:-.01em">
+          O que, exatamente, é "Distribuidor Digital"?
+          <span class="mono text-xl">+</span>
+        </summary>
+        <p class="mt-4 max-w-2xl text-sm leading-relaxed" style="color:#4a4a3d">
+          A operação que faz sua marca aparecer e converter no digital sem queimar a revenda física.
+          A Agrega opera o canal direto da indústria — marketplaces, e-commerce próprio,
+          mídia performance — mantendo política comercial e canal tradicional intactos.
+        </p>
+      </details>
+
+      <details class="border-t py-5" style="border-color:var(--rule)">
+        <summary class="flex items-center justify-between serif text-xl md:text-2xl" style="font-weight:400;letter-spacing:-.01em">
+          Vai gerar conflito com meus distribuidores atuais?
+          <span class="mono text-xl">+</span>
+        </summary>
+        <p class="mt-4 max-w-2xl text-sm leading-relaxed" style="color:#4a4a3d">
+          Não, se for desenhado certo. A operação digital começa em SKUs e canais que a revenda
+          historicamente não toca. O canal físico continua ganhando o que sempre ganhou.
+        </p>
+      </details>
+
+      <details class="border-t border-b py-5" style="border-color:var(--rule)">
+        <summary class="flex items-center justify-between serif text-xl md:text-2xl" style="font-weight:400;letter-spacing:-.01em">
+          Em quanto tempo eu vejo resultado?
+          <span class="mono text-xl">+</span>
+        </summary>
+        <p class="mt-4 max-w-2xl text-sm leading-relaxed" style="color:#4a4a3d">
+          GMV recorrente nos primeiros 60–90 dias. Visibilidade total do canal digital nos primeiros 30.
+          Defesa contra marca própria de revenda começa a aparecer no segundo trimestre.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============== COLOPHON ============== -->
+<footer class="ink-bg pt-20 pb-10 relative overflow-hidden">
+  <div class="ink-grain"></div>
+  <div class="max-w-[1280px] mx-auto px-6 relative">
+
+    <!-- closing sign-off, editorial colophon header -->
+    <div class="grid grid-cols-12 gap-6 mb-16 items-end">
+      <div class="col-span-12 md:col-span-8">
+        <div class="caption mb-4" style="color:var(--acid)">Sign-off</div>
+        <p class="serif-i italic" style="font-size:clamp(1.6rem,3.4vw,2.6rem);line-height:1.05;letter-spacing:-.015em;color:var(--on-ink);font-weight:400">
+          Quem tem o cliente, tem o poder.<br/>
+          <span style="color:var(--acid)">Quem tem o dado, tem o futuro.</span>
+        </p>
+      </div>
+      <div class="col-span-12 md:col-span-4 md:text-right">
+        <span class="caption" style="color:rgba(236,228,207,.45)">— Tese editorial · Agrega · 2026</span>
+      </div>
+    </div>
+
+    <div style="height:1px;background:rgba(236,228,207,.16);margin-bottom:3rem"></div>
+
+    <!-- masthead row -->
+    <div class="grid grid-cols-12 gap-x-8 gap-y-12">
+
+      <!-- brand block -->
+      <div class="col-span-12 md:col-span-5">
+        <span class="serif italic font-light" style="color:var(--acid);letter-spacing:-.045em;font-size:clamp(4rem,7vw,6rem);line-height:.9;display:inline-block">agrega<span style="color:var(--coral)">.</span></span>
+        <p class="mt-6 max-w-sm text-sm leading-relaxed" style="color:rgba(236,228,207,.72)">
+          Observatório do canal industrial brasileiro. Operação direta para indústrias
+          e importadores que querem o consumidor de volta — sem queimar a revenda.
+        </p>
+        <div class="mt-6 flex items-center gap-4 text-xs mono uppercase tracking-widest" style="color:rgba(236,228,207,.5)">
+          <a href="#" class="under" style="color:var(--on-ink)">linkedin</a>
+          <span style="color:rgba(236,228,207,.25)">·</span>
+          <a href="#" class="under" style="color:var(--on-ink)">contato</a>
+          <span style="color:rgba(236,228,207,.25)">·</span>
+          <a href="#" class="under" style="color:var(--on-ink)">imprensa</a>
+        </div>
+      </div>
+
+      <!-- expediente -->
+      <div class="col-span-6 md:col-span-2">
+        <div class="caption mb-3" style="color:var(--acid)">Expediente</div>
+        <ul class="space-y-1.5 text-sm" style="color:rgba(236,228,207,.78)">
+          <li>Vol. I · Nº 01</li>
+          <li>Maio · 2026</li>
+          <li>Distribuição privada</li>
+          <li>São Paulo · BR</li>
+        </ul>
+      </div>
+
+      <!-- conteúdo -->
+      <div class="col-span-6 md:col-span-2">
+        <div class="caption mb-3" style="color:var(--acid)">Capítulos</div>
+        <ul class="space-y-1.5 text-sm" style="color:rgba(236,228,207,.78)">
+          <li><a href="#contexto" class="under">01 · A inversão</a></li>
+          <li><a href="#manifesto" class="under">02 · A tese</a></li>
+          <li><a href="#diagnostico" class="under">03 · O instrumento</a></li>
+          <li><a href="#resultado" class="under">04 · O veredito</a></li>
+        </ul>
+      </div>
+
+      <!-- versão técnica -->
+      <div class="col-span-12 md:col-span-3">
+        <div class="caption mb-3" style="color:var(--acid)">Build</div>
+        <div class="mono text-xs leading-relaxed space-y-1" style="color:rgba(236,228,207,.6)">
+          <div>versão · <span style="color:var(--on-ink)">v0.2</span></div>
+          <div>release · <span style="color:var(--on-ink)">diagnóstico beta</span></div>
+          <div>tipografia · <span style="color:var(--on-ink)">Fraunces, Instrument Serif</span></div>
+          <div>build · <span style="color:var(--on-ink)">editorial</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- giant brand mark as artwork — escapes container, centered, fits viewport -->
+    <div class="mt-20 mb-6" aria-hidden="true" style="width:100vw;margin-left:calc(-50vw + 50%);overflow:hidden;text-align:center">
+      <div class="serif italic font-light leading-none" style="color:rgba(236,228,207,.07);font-size:clamp(3.5rem,9.5vw,8rem);letter-spacing:-.04em;white-space:nowrap;font-variation-settings:'opsz' 144,'SOFT' 100;display:inline-block">
+        Distribuidor Digital
+      </div>
+    </div>
+
+    <div style="height:1px;background:rgba(236,228,207,.16)"></div>
+
+    <!-- legal strip -->
+    <div class="mt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 mono text-xs uppercase tracking-widest" style="color:rgba(236,228,207,.5)">
+      <span>© 2026 — agrega · todos os direitos reservados</span>
+      <span class="flex items-center gap-2">
+        <span style="display:inline-block;width:6px;height:6px;background:var(--coral);border-radius:999px"></span>
+        impresso em pixels · feito em São Paulo
+      </span>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ============== SCRIPT ============== -->
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* word-splitter helper (no SplitText plugin needed) */
+function splitWords(el){
+  const html = el.innerHTML;
+  el.innerHTML = html.replace(/(<[^>]+>|[^\s<]+)/g, m =>
+    m.startsWith('<') ? m : `<span class="w" style="display:inline-block;will-change:transform,opacity">${m}</span>`
+  );
+}
+
+/* ============= HERO ============= */
+/* monumental headline reveal — line by line with overshoot */
+gsap.from('h1.display > *', {
+  y: 90, opacity: 0, scale: 1.02, duration: 1.4, ease: 'expo.out', stagger: .14, delay: .15
+});
+/* subdeck columns */
+gsap.from('.editorial-grid > *', {
+  y: 24, opacity: 0, duration: .9, ease: 'power3.out', stagger: .12, delay: .9
+});
+/* dateline + stamp settle */
+gsap.from('header .dateline, .stamp, .double-rule', {
+  opacity: 0, y: 6, duration: .8, stagger: .06, delay: .05
+});
+/* marquee fade-in */
+gsap.from('.marquee', { opacity: 0, duration: 1.2, delay: 1.1 });
+
+/* ============= MANIFESTO ============= */
+/* monumental numbers as artwork — printing-press clip mask reveal */
+gsap.utils.toArray('#manifesto .num-serif').forEach(el => {
+  gsap.fromTo(el,
+    { clipPath: 'inset(100% 0 0 0)', y: 12 },
+    {
+      clipPath: 'inset(0% 0 0 0)', y: 0,
+      duration: 1.3, ease: 'expo.out',
+      scrollTrigger: { trigger: el, start: 'top 85%' }
+    }
+  );
+});
+/* drop cap container reveal */
+gsap.from('#manifesto .dropcap', {
+  y: 18, opacity: 0, duration: 1, ease: 'power2.out',
+  scrollTrigger: { trigger: '#manifesto .dropcap', start: 'top 85%' }
+});
+/* pull quote — word by word */
+const pull = document.querySelector('.pull');
+if (pull) {
+  splitWords(pull);
+  gsap.from(pull.querySelectorAll('.w'), {
+    y: 30, opacity: 0, duration: .6, ease: 'power3.out', stagger: .035,
+    scrollTrigger: { trigger: pull, start: 'top 80%' }
+  });
+}
+
+/* ============= CYCLE FIGURE — choreographed scrubbed timeline ============= */
+const arcs = ['#arc12','#arc23','#arc34','#arc45','#arc56','#arc61'];
+arcs.forEach(sel => {
+  const p = document.querySelector(sel);
+  if (!p) return;
+  const len = p.getTotalLength();
+  p.style.strokeDasharray = len;
+  p.style.strokeDashoffset = len;
+});
+
+const cycleTl = gsap.timeline({
+  defaults: { ease: 'power2.inOut' },
+  scrollTrigger: {
+    trigger: '#loopFig',
+    start: 'top 75%',
+    toggleActions: 'play none none none'
+  }
+});
+
+cycleTl
+  /* TOP ROW appears first (legitimate flow) */
+  .to('.node-dot[data-i="0"]', { opacity: 1, duration: .15 }, 0)
+  .to('.node-label[data-i="0"]', { opacity: 1, duration: .35 }, 0)
+  .to('.node-dot[data-i="1"]', { opacity: 1, duration: .15 }, .18)
+  .to('.node-label[data-i="1"]', { opacity: 1, duration: .35 }, .18)
+  .to('.node-dot[data-i="2"]', { opacity: 1, duration: .15 }, .36)
+  .to('.node-label[data-i="2"]', { opacity: 1, duration: .35 }, .36)
+
+  /* black arcs draw, in order */
+  .to('#arc12', { strokeDashoffset: 0, duration: .55 }, .55)
+  .to('#annot12', { opacity: 1, duration: .3 }, .9)
+  .to('#arc23', { strokeDashoffset: 0, duration: .55 }, .9)
+  .to('#annot23', { opacity: 1, duration: .3 }, 1.25)
+
+  /* central legend (top half) */
+  .to('#lblFlow', { opacity: 1, duration: .3 }, 1.35)
+
+  /* THE PIVOT — vertical fall 03 → 04 (where the leak begins) */
+  .to('#arc34', { strokeDashoffset: 0, duration: .45, ease: 'power3.in' }, 1.5)
+  .to('#annot34', { opacity: 1, duration: .3 }, 1.85)
+
+  /* BOTTOM ROW appears */
+  .to('.node-dot[data-i="3"]', { opacity: 1, duration: .15 }, 1.95)
+  .to('.node-label[data-i="3"]', { opacity: 1, duration: .35 }, 1.95)
+  /* radar pulse on node 04 — the moment of capture */
+  .to('.node-dot[data-i="3"]', { attr: { r: 11 }, duration: .25, yoyo: true, repeat: 1 }, 2.05)
+
+  .to('.node-dot[data-i="4"]', { opacity: 1, duration: .15 }, 2.3)
+  .to('.node-label[data-i="4"]', { opacity: 1, duration: .35 }, 2.3)
+  .to('.node-dot[data-i="5"]', { opacity: 1, duration: .15 }, 2.5)
+  .to('.node-label[data-i="5"]', { opacity: 1, duration: .35 }, 2.5)
+
+  /* coral leak arcs */
+  .to('#arc45', { strokeDashoffset: 0, duration: .55 }, 2.7)
+  .to('#annot45', { opacity: 1, duration: .3 }, 3.05)
+  .to('#arc56', { strokeDashoffset: 0, duration: .55 }, 3.05)
+  .to('#annot56', { opacity: 1, duration: .3 }, 3.4)
+  .to('#lblLeak', { opacity: 1, duration: .3 }, 3.45)
+
+  /* CLOSING THE LOOP — vertical 06 → 01, indústria perde sem saber */
+  .to('#arc61', { strokeDashoffset: 0, duration: .45 }, 3.6)
+  .to('#annot61', { opacity: 1, duration: .3 }, 3.95)
+
+  /* CENTER STATS reveal — the punchline */
+  .to('#centerStats', { opacity: 1, duration: .8, ease: 'power2.out' }, 4.2);
+
+/* hero -> ticker subtle scroll-driven acceleration */
+gsap.to('.marquee', {
+  scrollTrigger: { trigger: '.marquee', start: 'top bottom', end: 'bottom top', scrub: 1 },
+  xPercent: -8
+});
+
+/* numbered chapter ledes parallax */
+gsap.utils.toArray('.num-serif').forEach(el => {
+  gsap.from(el, {
+    scrollTrigger: { trigger: el, start: 'top 90%' },
+    y: 20, opacity: 0, duration: .9, ease: 'power3.out'
+  });
+});
+
+/* ============= QUIZ DATA ============= */
+const QUESTIONS = [
+  { id:'d2c', dim:'consumidor',
+    title:'Sua marca vende direto pro consumidor final hoje?',
+    deck:'D2C real: e-commerce próprio, oficial, com volume rastreável.',
+    options:[
+      {label:'Operação D2C consolidada e recorrente.', score:20},
+      {label:'Existe, mas é simbólico — menos de 5% da receita.', score:8},
+      {label:'Estamos começando agora.', score:4},
+      {label:'Não. Só vendemos via distribuidor e revenda.', score:0},
+    ]},
+  { id:'revendas', dim:'canal',
+    title:'Quantas revendas e distribuidores formam seu canal?',
+    deck:'Mais canal significa mais GMV oculto a rastrear — e mais marca própria latente.',
+    options:[
+      {label:'Menos de 10.', score:5},
+      {label:'Entre 10 e 50.', score:10},
+      {label:'Entre 50 e 200.', score:15},
+      {label:'Mais de 200.', score:20},
+    ]},
+  { id:'mkp', dim:'marca',
+    title:'Sua marca aparece em marketplaces hoje?',
+    deck:'Aparecer não basta. A questão é quem opera a vitrine — e dita preço, conteúdo, percepção.',
+    options:[
+      {label:'Sim — temos loja oficial nossa, gerida internamente.', score:20},
+      {label:'Sim — mas vendido por terceiros sem controle nosso.', score:5},
+      {label:'Sim — operado por agência ou parceiro.', score:12},
+      {label:'Não aparece.', score:0},
+    ]},
+  { id:'gmv', dim:'visibilidade',
+    title:'Você tem visibilidade do GMV digital total da sua marca?',
+    deck:'Inclui o que a revenda vende online — não só seu canal direto.',
+    options:[
+      {label:'Sim — dashboard consolidado com todas as fontes.', score:20},
+      {label:'Parcial — só do que vendemos direto.', score:10},
+      {label:'Tem dado solto, mas ninguém olha.', score:4},
+      {label:'Não. Somos cegos no digital.', score:0},
+    ]},
+  { id:'mp', dim:'defesa',
+    title:'Algum revendedor seu já lançou marca própria competindo com a sua?',
+    deck:'Sinal de que o canal descobriu a margem — e está se autonomizando.',
+    options:[
+      {label:'Sim — e já sentimos no faturamento.', score:0},
+      {label:'Sim — pouco impacto até agora.', score:8},
+      {label:'Suspeitamos, sem certeza.', score:5},
+      {label:'Não acontece no nosso setor.', score:15},
+    ]},
+  { id:'controle', dim:'consumidor',
+    title:'Quanto da decisão de compra do consumidor final você controla?',
+    deck:'Conteúdo, posicionamento, dado, narrativa — não preço de tabela.',
+    options:[
+      {label:'Maior parte. Somos a referência.', score:20},
+      {label:'Metade. Disputamos com a revenda.', score:12},
+      {label:'Pouco. A revenda decide quase tudo.', score:4},
+      {label:'Nada. Somos commodity B2B pura.', score:0},
+    ]},
+];
+
+const DIMS = ['consumidor','canal','marca','visibilidade','defesa'];
+const DIM_LABELS = {
+  consumidor:'Acesso ao consumidor',
+  canal:'Diversificação de canal',
+  marca:'Controle da vitrine digital',
+  visibilidade:'Visibilidade do GMV',
+  defesa:'Defesa contra marca própria',
+};
+
+const state = { idx:0, answers:Array(QUESTIONS.length).fill(null), lead:null };
+const stage = document.getElementById('quizStage');
+const qIdx = document.getElementById('qIdx');
+const qProg = document.getElementById('qProg');
+const qBack = document.getElementById('qBack');
+const qNext = document.getElementById('qNext');
+
+function renderQuiz(){
+  stage.innerHTML = QUESTIONS.map((q,i)=>`
+    <div class="qcard ${i===state.idx?'active':''}" data-i="${i}">
+      <div class="caption mb-3" style="color:var(--acid)">QUESTÃO ${String(i+1).padStart(2,'0')} / ${q.dim.toUpperCase()}</div>
+      <h3 class="serif" style="font-weight:300;letter-spacing:-.02em;line-height:1.05;font-size:clamp(1.7rem,3.8vw,2.6rem);color:var(--on-ink)">${q.title}</h3>
+      <p class="serif-i italic mt-3 mb-7" style="font-size:1.1rem;color:rgba(236,228,207,.6)">${q.deck}</p>
+      <div>
+        ${q.options.map((o,oi)=>`
+          <button class="opt ${state.answers[i]===oi?'selected':''}" data-q="${i}" data-o="${oi}" style="color:var(--on-ink)">
+            <span class="key">${String(oi+1).padStart(2,'0')}</span>
+            <span class="lbl">${o.label}</span>
+            <span style="margin-left:auto;color:var(--acid);min-width:1rem;text-align:right">${state.answers[i]===oi?'✓':''}</span>
+          </button>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  qIdx.textContent = `PERGUNTA ${String(state.idx+1).padStart(2,'0')} / ${String(QUESTIONS.length).padStart(2,'0')}`;
+  qProg.textContent = `${state.idx+1} de ${QUESTIONS.length}`;
+  qBack.style.visibility = state.idx===0?'hidden':'visible';
+  qNext.style.display = state.answers[state.idx]!==null?'inline-flex':'none';
+  qNext.textContent = state.idx===QUESTIONS.length-1?'ver veredito →':'avançar →';
+
+  stage.querySelectorAll('.opt').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const qi = +el.dataset.q, oi = +el.dataset.o;
+      // micro-feedback flash before advancing
+      el.classList.add('flash');
+      state.answers[qi] = oi;
+      setTimeout(()=>{
+        renderQuiz();
+        setTimeout(()=>{
+          if(state.idx<QUESTIONS.length-1){ state.idx++; renderQuiz(); }
+          else openGate();
+        }, 240);
+      }, 160);
+    });
+  });
+}
+
+qBack.addEventListener('click',()=>{ if(state.idx>0){state.idx--;renderQuiz();} });
+qNext.addEventListener('click',()=>{
+  if(state.answers[state.idx]==null) return;
+  if(state.idx<QUESTIONS.length-1){ state.idx++; renderQuiz(); }
+  else openGate();
+});
+document.addEventListener('keydown',e=>{
+  const gateOpen = !document.getElementById('gate').classList.contains('hidden');
+  const resultOpen = !document.getElementById('resultado').classList.contains('hidden');
+  if(gateOpen || resultOpen) return;
+  const k = parseInt(e.key,10);
+  if(k>=1 && k<=4 && QUESTIONS[state.idx]?.options[k-1]){
+    state.answers[state.idx] = k-1; renderQuiz();
+    setTimeout(()=>{
+      if(state.idx<QUESTIONS.length-1){ state.idx++; renderQuiz(); }
+      else openGate();
+    }, 320);
+  }
+  if(e.key==='ArrowLeft' && state.idx>0){ state.idx--; renderQuiz(); }
+  if(e.key==='ArrowRight' && state.answers[state.idx]!=null){
+    if(state.idx<QUESTIONS.length-1){ state.idx++; renderQuiz(); }
+    else openGate();
+  }
+});
+
+/* ============= GATE (lead capture) =============
+ *
+ * SUPABASE INTEGRATION (Agrega Commerce — Lovable + Supabase project)
+ * ------------------------------------------------------------------
+ * 1. No Supabase Studio do projeto Agrega Commerce, rode esta migration:
+ *
+ *    create table if not exists public.diagnostico_leads (
+ *      id           uuid default gen_random_uuid() primary key,
+ *      name         text not null,
+ *      company      text not null,
+ *      role         text not null,
+ *      email        text not null,
+ *      score        int,
+ *      band         text,
+ *      headline     text,
+ *      answers      jsonb,
+ *      dimensions   jsonb,
+ *      user_agent   text,
+ *      referer      text,
+ *      created_at   timestamptz default now()
+ *    );
+ *    alter table public.diagnostico_leads enable row level security;
+ *    create policy "anon insert leads" on public.diagnostico_leads
+ *      for insert to anon with check (true);
+ *
+ * 2. Settings → API: copia Project URL e anon key, cola abaixo:
+ */
+const SUPABASE_URL = 'https://uqnnbkgieogzpzgyfqem.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxbm5ia2dpZW9nenB6Z3lmcWVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4OTEwMzEsImV4cCI6MjA4NDQ2NzAzMX0.ki_DQs21e84FBQ2bnfpZMJtOvVTfLnBfn72CvvyUS0M';
+const SUPABASE_TABLE = 'diagnostico_leads';
+
+const BLOCKED_DOMAINS = ['gmail.com','hotmail.com','outlook.com','yahoo.com','yahoo.com.br','live.com','icloud.com','uol.com.br','bol.com.br','terra.com.br','protonmail.com','aol.com','msn.com'];
+
+function openGate(){
+  document.getElementById('diagnostico').classList.add('hidden');
+  document.getElementById('gate').classList.remove('hidden');
+  window.scrollTo({top: document.getElementById('gate').offsetTop - 30, behavior:'smooth'});
+  setTimeout(()=>document.getElementById('gName').focus(), 700);
+}
+
+const gateForm = document.getElementById('gateForm');
+if (gateForm) {
+  gateForm.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const name = document.getElementById('gName');
+    const company = document.getElementById('gCompany');
+    const role = document.getElementById('gRole');
+    const email = document.getElementById('gEmail');
+    const hint = document.getElementById('gEmailHint');
+
+    let valid = true;
+    [name, company, role].forEach(el=>{
+      if(!el.value.trim()){ el.classList.add('invalid'); valid=false; }
+      else el.classList.remove('invalid');
+    });
+
+    const emailVal = email.value.trim().toLowerCase();
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const domain = emailVal.split('@')[1] || '';
+    if(!emailRe.test(emailVal)){
+      email.classList.add('invalid');
+      hint.textContent = 'EMAIL INVÁLIDO — VERIFIQUE O FORMATO';
+      hint.style.color = 'var(--coral)';
+      valid = false;
+    } else if(BLOCKED_DOMAINS.includes(domain)){
+      email.classList.add('invalid');
+      hint.textContent = 'USE EMAIL CORPORATIVO — DOMÍNIO PESSOAL NÃO QUALIFICA';
+      hint.style.color = 'var(--coral)';
+      valid = false;
+    } else {
+      email.classList.remove('invalid');
+      hint.textContent = 'SEM GMAIL/HOTMAIL — APENAS DOMÍNIOS CORPORATIVOS';
+      hint.style.color = 'rgba(236,228,207,.4)';
+    }
+
+    if(!valid) return;
+
+    state.lead = {
+      name: name.value.trim(),
+      company: company.value.trim(),
+      role: role.value.trim(),
+      email: emailVal,
+      submitted_at: new Date().toISOString()
+    };
+
+    /* compute the diagnostic now so we can persist lead + result together */
+    const r = compute();
+
+    const payload = {
+      name: state.lead.name,
+      company: state.lead.company,
+      role: state.lead.role,
+      email: state.lead.email,
+      score: r.score,
+      band: r.band,
+      headline: r.headline,
+      answers: state.answers.map((oi, qi) => ({
+        question_id: QUESTIONS[qi].id,
+        option_index: oi,
+        score: QUESTIONS[qi].options[oi].score
+      })),
+      dimensions: Object.fromEntries(DIMS.map((d, i) => [d, r.radar[i]])),
+      user_agent: navigator.userAgent,
+      referer: document.referrer || null
+    };
+
+    console.log('[diagnostico-agrega] lead captured:', payload);
+
+    /* fire-and-forget POST to Supabase. Failure does NOT block UX. */
+    if (SUPABASE_URL && !SUPABASE_URL.includes('YOUR_PROJECT')) {
+      fetch(`${SUPABASE_URL}/rest/v1/${SUPABASE_TABLE}`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(payload)
+      }).catch(err => console.warn('[diagnostico-agrega] supabase post failed:', err));
+    } else {
+      console.warn('[diagnostico-agrega] SUPABASE_URL not configured — lead NOT persisted. Update the constant at the top of this script.');
+    }
+
+    document.getElementById('gate').classList.add('hidden');
+    showResult();
+  });
+}
+
+renderQuiz();
+
+/* ============= RESULT ============= */
+function compute(){
+  let total=0,max=0;
+  const dims = Object.fromEntries(DIMS.map(d=>[d,{s:0,m:0}]));
+  QUESTIONS.forEach((q,i)=>{
+    const opt = q.options[state.answers[i]];
+    const optMax = Math.max(...q.options.map(o=>o.score));
+    total+=opt.score; max+=optMax;
+    dims[q.dim].s+=opt.score; dims[q.dim].m+=optMax;
+  });
+  const score = Math.round((total/max)*100);
+  let band, label, headline, narrative;
+  if(score<=33){
+    band='vulneravel'; label='Vulnerável';
+    headline='Sua marca está refém do canal.';
+    narrative='A revenda decide preço, vitrine, percepção e — provavelmente em breve — quem é a marca. O movimento do próximo trimestre não é otimização: é começar a existir no digital.';
+  } else if(score<=66){
+    band='transicao'; label='Em transição';
+    headline='Você começou. Falta blindar.';
+    narrative='A operação digital existe, mas opera no escuro em pelo menos uma frente crítica. A janela pra consolidar antes que a revenda virte concorrente direta é estreita: 12 a 18 meses.';
+  } else {
+    band='maduro'; label='Maduro';
+    headline='Boa estrutura. Hora de alavancar.';
+    narrative='Você tem visibilidade e canal. O salto de valor agora vem de precificação dinâmica, defesa de buy-box e mídia performance própria — não de tentar abrir mais canais.';
+  }
+  const radar = DIMS.map(d=>{ const {s,m}=dims[d]; return m===0?0:Math.round((s/m)*100); });
+  return { score, band, label, headline, narrative, radar, dims };
+}
+
+function recommendationsFor(r){
+  const POOL = {
+    consumidor:{
+      title:'Abrir um canal D2C antes que a revenda abra contra você',
+      body:'5 a 10 SKUs estratégicos em loja oficial e marketplace próprio. Não substitui revenda. Cria piso de margem e captura o dado de quem compra.'
+    },
+    canal:{
+      title:'Mapear o GMV oculto do seu próprio canal',
+      body:'Sua revenda já vende sua marca no digital — você não vê. Em 30 dias dá pra mapear preço, posicionamento e share por marketplace de cada parceiro.'
+    },
+    marca:{
+      title:'Recuperar a vitrine nos marketplaces',
+      body:'Buy-box é guerra: quem ganha define preço, conteúdo e percepção. Loja oficial gerida diretamente é o único caminho pra não virar commodity.'
+    },
+    visibilidade:{
+      title:'Dashboard único de GMV digital total',
+      body:'Consolidação de venda direta + revenda + marketplace por SKU. Pré-requisito de qualquer decisão de canal nos próximos 12 meses.'
+    },
+    defesa:{
+      title:'Antecipar a marca própria de revenda',
+      body:'Identifique os 3 SKUs mais vulneráveis a clonagem e proteja com diferenciação real — formulação, atendimento, dado, marca. Quem não defende, perde.'
+    }
+  };
+  const weakest = DIMS.map(d=>({d,score:r.dims[d].m? r.dims[d].s/r.dims[d].m:1}))
+                       .sort((x,y)=>x.score-y.score);
+  const recs = weakest.slice(0,3).map(w=>POOL[w.d]);
+  if(r.band==='vulneravel'){
+    recs.unshift({
+      title:'Tratar digital como operação, não como projeto',
+      body:'Receita digital abaixo de 5%? Causa raiz é não ter dono dedicado. Próximo trimestre: operação digital com SLA, KPI e dono — não mais "marketing cuida".'
+    });
+  } else if(r.band==='maduro'){
+    recs.unshift({
+      title:'Da maturidade à alavancagem',
+      body:'Você tem visibilidade. Próximo nível é precificação dinâmica por canal, blindagem de buy-box e mídia performance própria. Margem aparece aqui.'
+    });
+  }
+  return recs.slice(0,3);
+}
+
+function showResult(){
+  const r = compute();
+  document.getElementById('resultado').classList.remove('hidden');
+  document.getElementById('diagnostico').classList.add('hidden');
+  window.scrollTo({top:document.getElementById('resultado').offsetTop-30,behavior:'smooth'});
+
+  document.getElementById('resultHeadline').textContent = r.headline;
+  document.getElementById('scoreLabel').textContent = r.label;
+  document.getElementById('scoreNarrative').textContent = r.narrative;
+
+  // count up score
+  const valEl = document.getElementById('scoreVal');
+  let cur=0; const step=Math.max(1,Math.round(r.score/45));
+  const tick=setInterval(()=>{
+    cur+=step;
+    if(cur>=r.score){cur=r.score;clearInterval(tick)}
+    valEl.textContent = String(cur).padStart(2,'0');
+  },24);
+
+  // dimension bars
+  const dimList = document.getElementById('dimList');
+  dimList.innerHTML = DIMS.map((d,i)=>{
+    const v = r.radar[i];
+    const accent = v<33?'var(--coral)': (v<66?'var(--ink)':'var(--cobalt)');
+    return `
+      <div class="dim-row">
+        <div>
+          <div class="caption" style="color:#4a4a3d">DIM. ${String(i+1).padStart(2,'0')}</div>
+          <div class="serif text-lg md:text-xl mt-1" style="font-weight:400;letter-spacing:-.01em">${DIM_LABELS[d]}</div>
+        </div>
+        <div class="bar-track" data-pct="${v}"><div class="bar-fill" style="background:repeating-linear-gradient(45deg, ${accent} 0 6px, transparent 6px 12px)"></div></div>
+        <div class="num-mono text-2xl" style="color:${accent}">${v}<span class="text-sm" style="color:#9b9b80">/100</span></div>
+      </div>
+    `;
+  }).join('');
+  // animate fills
+  setTimeout(()=>{
+    document.querySelectorAll('.bar-track').forEach(t=>{
+      const pct = +t.dataset.pct;
+      t.querySelector('.bar-fill').style.transform = `scaleX(${pct/100})`;
+    });
+  },120);
+
+  // findings
+  const recList = document.getElementById('recList');
+  recList.innerHTML = recommendationsFor(r).map((rc,i)=>`
+    <div class="finding">
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-2 md:col-span-1">
+          <div class="num-serif" style="font-size:3rem;color:var(--coral);font-weight:200">${String(i+1).padStart(2,'0')}</div>
+        </div>
+        <div class="col-span-10 md:col-span-11">
+          <h4 class="serif text-xl md:text-2xl" style="font-weight:400;letter-spacing:-.01em">${rc.title}</h4>
+          <p class="mt-2 max-w-2xl text-sm leading-relaxed" style="color:#4a4a3d">${rc.body}</p>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // CTA
+  const lead = state.lead || {};
+  const leadHeader = lead.name
+    ? `Olá! Aqui é ${lead.name} — ${lead.role || 'cargo não informado'} na ${lead.company || 'empresa'} (${lead.email || 'sem email'}).\n\n`
+    : '';
+  const summary =
+`${leadHeader}Acabei de fazer o Diagnóstico Distribuidor Digital — Agrega · Edição 01
+
+Score: ${r.score}/100 — ${r.label}
+Veredito: ${r.headline}
+
+Dimensões:
+${DIMS.map((d,i)=>`• ${DIM_LABELS[d]}: ${r.radar[i]}/100`).join('\n')}
+
+Quero conversar com a Agrega sobre o canal digital da minha marca.`;
+  document.getElementById('ctaWhats').href = `https://wa.me/?text=${encodeURIComponent(summary)}`;
+  document.getElementById('ctaCopy').addEventListener('click',()=>{
+    navigator.clipboard.writeText(summary).then(()=>{
+      const t = document.getElementById('ctaCopyText');
+      const o = t.textContent; t.textContent='copiado ✓';
+      setTimeout(()=>t.textContent=o,1800);
+    });
+  });
+}
+
+document.getElementById('restart').addEventListener('click',()=>{
+  state.idx=0; state.answers=Array(QUESTIONS.length).fill(null); state.lead=null;
+  document.getElementById('resultado').classList.add('hidden');
+  document.getElementById('gate').classList.add('hidden');
+  document.getElementById('diagnostico').classList.remove('hidden');
+  /* clear gate fields */
+  ['gName','gCompany','gRole','gEmail'].forEach(id=>{
+    const el = document.getElementById(id);
+    if (el) { el.value = ''; el.classList.remove('invalid'); }
+  });
+  renderQuiz();
+  window.scrollTo({top:document.getElementById('diagnostico').offsetTop-30,behavior:'smooth'});
+});
+</script>
+</body>
+</html>
