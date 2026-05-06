@@ -215,8 +215,28 @@
     details summary{font-size:1.1rem !important}
   }
 
+  /* ============= CYCLE FIGURE — wow motion layer ============= */
+  @keyframes acidPulse{0%,100%{stroke-opacity:.7}50%{stroke-opacity:1}}
+  @keyframes leakBreathe{0%,100%{stroke-opacity:.45}30%{stroke-opacity:.85}55%{stroke-opacity:.18}80%{stroke-opacity:.7}}
+  @keyframes cometRunInk{from{stroke-dashoffset:0}to{stroke-dashoffset:-650}}
+  @keyframes cometRunLeak{from{stroke-dashoffset:0}to{stroke-dashoffset:-344}}
+  @keyframes flicker{0%,18%,22%,40%,42%,68%,72%,100%{opacity:1}19%,41%,69%{opacity:.18}21%,71%{opacity:.55}}
+  @keyframes glitchNudge{0%,100%{transform:translate(0,0)}25%{transform:translate(.7px,-.5px)}50%{transform:translate(-.5px,.7px)}75%{transform:translate(.4px,.4px)}}
+  @keyframes scanLine{0%{transform:translateY(0)}100%{transform:translateY(720px)}}
+
+  #loopSvg .comet{fill:none;stroke-linecap:round;mix-blend-mode:multiply}
+  #loopSvg .comet-ink{stroke:#0d0d0a;stroke-width:3;stroke-dasharray:50 600;animation:cometRunInk 3.2s linear infinite,acidPulse 2.4s ease-in-out infinite}
+  #loopSvg .comet-ink-fast{stroke:#0d0d0a;stroke-width:3;stroke-dasharray:50 600;animation:cometRunInk 2.4s linear infinite,acidPulse 2.4s ease-in-out infinite}
+  #loopSvg .comet-leak{stroke:#ff4a1c;stroke-width:2.6;stroke-dasharray:12 8 4 30 4 8 6 60 12 200;animation:cometRunLeak 5.4s linear infinite,leakBreathe 3.6s ease-in-out infinite;filter:url(#coralBlur)}
+  #loopSvg .tx-dead text,#loopSvg .tx-dead circle,#loopSvg .tx-dead rect{animation:flicker 2.6s linear infinite}
+  #loopSvg .glitch{transform-box:fill-box;animation:glitchNudge .18s steps(4) infinite}
+  #loopSvg .scan-line{animation:scanLine 6.5s linear infinite;opacity:.3}
+
+  #cometLayer,#particleLayer,#radarRings,#txDead,#lostZone,#scanFx{opacity:0}
+
   @media (prefers-reduced-motion:reduce){
     *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+    #loopSvg .comet,#loopSvg .scan-line,#loopSvg .tx-dead,#loopSvg .glitch,#loopSvg .ghost-orbit{animation:none!important}
   }
 </style>
 </head>
@@ -434,10 +454,19 @@
           <marker id="arrCoral" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
             <path d="M0,0 L0,6 L7,3 z" fill="#ff4a1c"/>
           </marker>
+          <filter id="coralBlur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="1.2"/></filter>
+          <filter id="brokenSig" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="2"/></filter>
+          <radialGradient id="lostHaze" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff4a1c" stop-opacity=".18"/><stop offset="70%" stop-color="#ff4a1c" stop-opacity="0"/></radialGradient>
         </defs>
 
-        <!-- ghost ellipse, hint of the cycle -->
-        <ellipse cx="600" cy="360" rx="540" ry="270" fill="none" stroke="#1a1a14" stroke-width=".5" stroke-dasharray="2 6" opacity=".12"/>
+        <!-- ghost ellipse, dual orbit slowly rotating -->
+        <g class="ghost-orbit">
+          <animateTransform attributeName="transform" type="rotate" from="0 600 360" to="360 600 360" dur="120s" repeatCount="indefinite"/>
+          <ellipse cx="600" cy="360" rx="540" ry="270" fill="none" stroke="#1a1a14" stroke-width=".5" stroke-dasharray="2 6" opacity=".12"/>
+          <ellipse cx="600" cy="360" rx="540" ry="270" fill="none" stroke="#1a1a14" stroke-width=".4" stroke-dasharray="1 12" opacity=".18" transform="rotate(15 600 360)"/>
+        </g>
+        <!-- soft loss haze under the lost-zone band -->
+        <ellipse cx="600" cy="490" rx="320" ry="36" fill="url(#lostHaze)" opacity=".7"/>
 
         <!-- ARCS — top row (legitimate flow) -->
         <path id="arc12" class="cycle-arc" d="M 168 188 Q 380 95 572 110" fill="none" stroke="#0d0d0a" stroke-width="1.6" marker-end="url(#arrBlack)"/>
@@ -463,12 +492,12 @@
         <g id="centerStats" opacity="0">
           <!-- LEFT COLUMN — margin captured (coral) -->
           <text x="345" y="288" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" letter-spacing="2" fill="#4a4a3d">MARGEM CAPTURADA</text>
-          <text x="345" y="358" text-anchor="middle" font-family="Fraunces" font-weight="200" font-size="86" fill="#ff4a1c" letter-spacing="-3" font-variation-settings="'opsz' 144,'SOFT' 100">+50%</text>
+          <text id="stat-margin" x="345" y="358" text-anchor="middle" font-family="Fraunces" font-weight="200" font-size="86" fill="#ff4a1c" letter-spacing="-3" font-variation-settings="'opsz' 144,'SOFT' 100">+50%</text>
           <text x="345" y="380" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="13" fill="#4a4a3d">pelo lojista que vira marca</text>
 
           <!-- RIGHT COLUMN — share evaporated (ink) -->
           <text x="855" y="288" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" letter-spacing="2" fill="#4a4a3d">SHARE EVAPORADO</text>
-          <text x="855" y="358" text-anchor="middle" font-family="Fraunces" font-weight="200" font-size="86" fill="#0d0d0a" letter-spacing="-3" font-variation-settings="'opsz' 144,'SOFT' 100">−40%</text>
+          <text id="stat-share" x="855" y="358" text-anchor="middle" font-family="Fraunces" font-weight="200" font-size="86" fill="#0d0d0a" letter-spacing="-3" font-variation-settings="'opsz' 144,'SOFT' 100">−40%</text>
           <text x="855" y="380" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="13" fill="#4a4a3d">pela indústria, sem nem saber</text>
         </g>
 
@@ -483,6 +512,123 @@
         <circle class="node-dot" data-i="3" cx="1060" cy="520" r="6" fill="#ff4a1c" opacity="0"/>
         <circle class="node-dot" data-i="4" cx="600" cy="610" r="5" fill="#ff4a1c" opacity="0"/>
         <circle class="node-dot" data-i="5" cx="140" cy="520" r="6" fill="#ff4a1c" opacity="0"/>
+
+        <!-- ============ COMET LAYER — pulses traveling along each arc ============ -->
+        <g id="cometLayer">
+          <path class="comet comet-ink" d="M 168 188 Q 380 95 572 110"/>
+          <path class="comet comet-ink" d="M 628 110 Q 820 95 1032 188"/>
+          <path class="comet comet-ink-fast" d="M 1060 230 L 1060 488"/>
+          <path class="comet comet-leak" d="M 1032 533 Q 820 627 628 612"/>
+          <path class="comet comet-leak" d="M 572 612 Q 380 627 168 533"/>
+          <path class="comet comet-leak" d="M 140 488 L 140 232"/>
+        </g>
+
+        <!-- ============ PARTICLE LAYER — products + data flowing forward, dissolving on the leak ============ -->
+        <g id="particleLayer">
+          <!-- arc12: indústria → distribuidor (ink product + lime data spark) -->
+          <circle r="3.6" fill="#0d0d0a">
+            <animateMotion dur="3.2s" begin="0s" repeatCount="indefinite" rotate="auto"><mpath href="#arc12"/></animateMotion>
+          </circle>
+          <circle r="2" fill="#cfff37" stroke="#0d0d0a" stroke-width=".6">
+            <animateMotion dur="3.2s" begin="1.6s" repeatCount="indefinite" rotate="auto"><mpath href="#arc12"/></animateMotion>
+          </circle>
+          <!-- arc23: distribuidor → lojista -->
+          <circle r="3.6" fill="#0d0d0a">
+            <animateMotion dur="3.2s" begin=".4s" repeatCount="indefinite" rotate="auto"><mpath href="#arc23"/></animateMotion>
+          </circle>
+          <circle r="2" fill="#cfff37" stroke="#0d0d0a" stroke-width=".6">
+            <animateMotion dur="3.2s" begin="2s" repeatCount="indefinite" rotate="auto"><mpath href="#arc23"/></animateMotion>
+          </circle>
+          <!-- arc34: pivot down (capture moment) -->
+          <circle r="3.6" fill="#0d0d0a">
+            <animateMotion dur="2.4s" begin="0s" repeatCount="indefinite"><mpath href="#arc34"/></animateMotion>
+          </circle>
+          <circle r="2" fill="#ff4a1c">
+            <animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite"><mpath href="#arc34"/></animateMotion>
+          </circle>
+
+          <!-- LEAK arc45: data dispersing — opacity + radius decay mid-path -->
+          <circle r="3.4" fill="#ff4a1c">
+            <animateMotion dur="5.4s" begin="0s" repeatCount="indefinite"><mpath href="#arc45"/></animateMotion>
+            <animate attributeName="opacity" values="0;.95;.85;.4;.1;0" keyTimes="0;.08;.45;.65;.85;1" dur="5.4s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="3.4;3.4;2.8;1.8;.9;0" keyTimes="0;.08;.45;.65;.85;1" dur="5.4s" repeatCount="indefinite"/>
+          </circle>
+          <circle r="3" fill="#ff4a1c">
+            <animateMotion dur="5.4s" begin="2.4s" repeatCount="indefinite"><mpath href="#arc45"/></animateMotion>
+            <animate attributeName="opacity" values="0;.85;.7;.3;.05;0" keyTimes="0;.08;.45;.7;.9;1" dur="5.4s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="3;3;2.4;1.4;.6;0" keyTimes="0;.08;.45;.7;.9;1" dur="5.4s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- LEAK arc56: same dispersion -->
+          <circle r="3.4" fill="#ff4a1c">
+            <animateMotion dur="5.4s" begin=".8s" repeatCount="indefinite"><mpath href="#arc56"/></animateMotion>
+            <animate attributeName="opacity" values="0;.95;.65;.25;0" keyTimes="0;.1;.5;.8;1" dur="5.4s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="3.4;3.4;2.4;1.2;0" keyTimes="0;.1;.5;.8;1" dur="5.4s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- LEAK arc61: closing — fragmento que mal chega -->
+          <circle r="3" fill="#ff4a1c">
+            <animateMotion dur="4.4s" begin="0s" repeatCount="indefinite"><mpath href="#arc61"/></animateMotion>
+            <animate attributeName="opacity" values="0;.85;.55;.15;0" keyTimes="0;.15;.55;.85;1" dur="4.4s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="3;3;1.8;.7;0" keyTimes="0;.15;.55;.85;1" dur="4.4s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+
+        <!-- ============ RADAR RINGS — nodes pulsando como sinal ============ -->
+        <g id="radarRings">
+          <!-- nodes 0,1,2 — fluxo legítimo (cobalt + ink) -->
+          <circle cx="140" cy="200" r="9" fill="none" stroke="#1c34ff" stroke-width="1.2">
+            <animate attributeName="r" values="9;28;9" dur="2.6s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;.55;0" dur="2.6s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="600" cy="110" r="7" fill="none" stroke="#0d0d0a" stroke-width="1">
+            <animate attributeName="r" values="7;22;7" dur="2.6s" begin=".7s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;.4;0" dur="2.6s" begin=".7s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="1060" cy="200" r="9" fill="none" stroke="#1c34ff" stroke-width="1.2">
+            <animate attributeName="r" values="9;28;9" dur="2.6s" begin="1.4s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;.55;0" dur="2.6s" begin="1.4s" repeatCount="indefinite"/>
+          </circle>
+          <!-- node 3 — momento da captura (coral, dois rings, mais forte) -->
+          <circle cx="1060" cy="520" r="9" fill="none" stroke="#ff4a1c" stroke-width="1.4">
+            <animate attributeName="r" values="9;36;9" dur="3.2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;.75;0" dur="3.2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="1060" cy="520" r="9" fill="none" stroke="#ff4a1c" stroke-width="1">
+            <animate attributeName="r" values="9;52;9" dur="3.2s" begin=".9s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;.4;0" dur="3.2s" begin=".9s" repeatCount="indefinite"/>
+          </circle>
+          <!-- node 4 — sinal quebrado (dashed) -->
+          <circle cx="600" cy="610" r="6" fill="none" stroke="#ff4a1c" stroke-width="1" stroke-dasharray="3 3">
+            <animate attributeName="r" values="6;20;6" dur="2.4s" begin="1.2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;.5;0" dur="2.4s" begin="1.2s" repeatCount="indefinite"/>
+          </circle>
+          <!-- node 5 — sinal sumindo -->
+          <circle cx="140" cy="520" r="9" fill="none" stroke="#ff4a1c" stroke-width="1.2" stroke-dasharray="2 4">
+            <animate attributeName="r" values="9;30;9" dur="3s" begin=".4s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;.55;0" dur="3s" begin=".4s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+
+        <!-- ============ TX DEAD INDICATOR — top right, sinal morto ============ -->
+        <g id="txDead" class="tx-dead">
+          <rect x="978" y="40" width="186" height="38" fill="none" stroke="#ff4a1c" stroke-width=".8" stroke-dasharray="3 3"/>
+          <circle cx="998" cy="59" r="3.5" fill="#ff4a1c"/>
+          <text x="1016" y="56" font-family="JetBrains Mono" font-size="8.5" letter-spacing="2" fill="#ff4a1c">TX 03 → 06</text>
+          <text x="1016" y="69" font-family="JetBrains Mono" font-size="8.5" letter-spacing="2" fill="#ff4a1c" font-weight="700">NO SIGNAL</text>
+        </g>
+
+        <!-- ============ LOST ZONE — banda fantasma central ============ -->
+        <g id="lostZone">
+          <line x1="320" y1="488" x2="880" y2="488" stroke="#ff4a1c" stroke-width=".5" stroke-dasharray="1 6" opacity=".45"/>
+          <text class="glitch" x="600" y="476" text-anchor="middle" font-family="JetBrains Mono" font-size="9" letter-spacing="3.5" fill="#ff4a1c">↳ DADO PERDIDO ENTRE 03 E 06</text>
+          <text x="600" y="510" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="13" fill="#4a4a3d" opacity=".75">a indústria nunca recebe o sinal de volta</text>
+        </g>
+
+        <!-- ============ SCAN LINE — sweep editorial sutil ============ -->
+        <g id="scanFx">
+          <line class="scan-line" x1="60" y1="0" x2="1140" y2="0" stroke="#0d0d0a" stroke-width=".3" opacity=".18"/>
+        </g>
       </svg>
 
       <!-- HTML labels — % positions calibrated to svg coords (viewBox 1200x720) -->
@@ -1067,7 +1213,27 @@ cycleTl
   .from('#centerStats > text:nth-child(3)', { opacity: 0, y: 6, duration: .35, ease: 'power3.out' }, 4.65)
   .from('#centerStats > text:nth-child(4)', { opacity: 0, y: 6, duration: .35, ease: 'power3.out' }, 4.85)
   .from('#centerStats > text:nth-child(5)', { opacity: 0, scale: .9, transformOrigin: 'center', duration: .55, ease: 'back.out(1.4)' }, 5.0)
-  .from('#centerStats > text:nth-child(6)', { opacity: 0, y: 6, duration: .35, ease: 'power3.out' }, 5.25);
+  .from('#centerStats > text:nth-child(6)', { opacity: 0, y: 6, duration: .35, ease: 'power3.out' }, 5.25)
+
+  /* ============ MOTION LAYER REVEAL — overlays que dão vida ao diagrama ============ */
+  .to('#scanFx',       { opacity: 1, duration: 1.0, ease:'power2.out' }, 0)
+  .to('#cometLayer',   { opacity: 1, duration: 1.2, ease:'power2.out' }, 1.0)
+  .to('#particleLayer',{ opacity: 1, duration: 1.0, ease:'power2.out' }, 1.4)
+  .to('#radarRings',   { opacity: 1, duration: 1.4, ease:'power2.out' }, 2.0)
+  .to('#txDead',       { opacity: 1, duration: .5,  ease:'power2.out' }, 2.05)
+  .to('#lostZone',     { opacity: 1, duration: .8,  ease:'power2.out' }, 3.6)
+  /* count-up dos números — punchline editorial */
+  .call(() => countUp('stat-margin', 50, '+', 1.6), null, 4.4)
+  .call(() => countUp('stat-share',  40, '−', 1.6), null, 5.0);
+
+function countUp(id, target, prefix, duration){
+  const el = document.getElementById(id);
+  if (!el) return;
+  const obj = { v: 0 };
+  gsap.to(obj, { v: target, duration: duration || 1.4, ease: 'power2.out',
+    onUpdate(){ el.textContent = prefix + Math.round(obj.v) + '%'; }
+  });
+}
 
 /* hero -> ticker subtle scroll-driven acceleration */
 gsap.to('.marquee', {
