@@ -215,28 +215,13 @@
     details summary{font-size:1.1rem !important}
   }
 
-  /* ============= CYCLE FIGURE — wow motion layer ============= */
-  @keyframes acidPulse{0%,100%{stroke-opacity:.7}50%{stroke-opacity:1}}
-  @keyframes leakBreathe{0%,100%{stroke-opacity:.45}30%{stroke-opacity:.85}55%{stroke-opacity:.18}80%{stroke-opacity:.7}}
-  @keyframes cometRunInk{from{stroke-dashoffset:0}to{stroke-dashoffset:-650}}
-  @keyframes cometRunLeak{from{stroke-dashoffset:0}to{stroke-dashoffset:-344}}
-  @keyframes flicker{0%,18%,22%,40%,42%,68%,72%,100%{opacity:1}19%,41%,69%{opacity:.18}21%,71%{opacity:.55}}
-  @keyframes glitchNudge{0%,100%{transform:translate(0,0)}25%{transform:translate(.7px,-.5px)}50%{transform:translate(-.5px,.7px)}75%{transform:translate(.4px,.4px)}}
-  @keyframes scanLine{0%{transform:translateY(0)}100%{transform:translateY(720px)}}
-
-  #loopSvg .comet{fill:none;stroke-linecap:round;mix-blend-mode:multiply}
-  #loopSvg .comet-ink{stroke:#0d0d0a;stroke-width:3;stroke-dasharray:50 600;animation:cometRunInk 3.2s linear infinite,acidPulse 2.4s ease-in-out infinite}
-  #loopSvg .comet-ink-fast{stroke:#0d0d0a;stroke-width:3;stroke-dasharray:50 600;animation:cometRunInk 2.4s linear infinite,acidPulse 2.4s ease-in-out infinite}
-  #loopSvg .comet-leak{stroke:#ff4a1c;stroke-width:2.6;stroke-dasharray:12 8 4 30 4 8 6 60 12 200;animation:cometRunLeak 5.4s linear infinite,leakBreathe 3.6s ease-in-out infinite;filter:url(#coralBlur)}
-  #loopSvg .tx-dead text,#loopSvg .tx-dead circle,#loopSvg .tx-dead rect{animation:flicker 2.6s linear infinite}
-  #loopSvg .glitch{transform-box:fill-box;animation:glitchNudge .18s steps(4) infinite}
-  #loopSvg .scan-line{animation:scanLine 6.5s linear infinite;opacity:.3}
-
-  #cometLayer,#particleLayer,#radarRings,#txDead,#lostZone,#scanFx{opacity:0}
+  /* ============= CYCLE FIGURE — choreographed 8s loop ============= */
+  /* parent groups start hidden; GSAP intro fades them in once user reaches the figure */
+  #particleLayer,#radarRings,#txDead,#lostZone{opacity:0}
 
   @media (prefers-reduced-motion:reduce){
     *{animation-duration:.01ms!important;transition-duration:.01ms!important}
-    #loopSvg .comet,#loopSvg .scan-line,#loopSvg .tx-dead,#loopSvg .glitch,#loopSvg .ghost-orbit{animation:none!important}
+    #loopSvg .ghost-orbit *{animation:none!important}
   }
 </style>
 </head>
@@ -513,121 +498,140 @@
         <circle class="node-dot" data-i="4" cx="600" cy="610" r="5" fill="#ff4a1c" opacity="0"/>
         <circle class="node-dot" data-i="5" cx="140" cy="520" r="6" fill="#ff4a1c" opacity="0"/>
 
-        <!-- ============ COMET LAYER — pulses traveling along each arc ============ -->
-        <g id="cometLayer">
-          <path class="comet comet-ink" d="M 168 188 Q 380 95 572 110"/>
-          <path class="comet comet-ink" d="M 628 110 Q 820 95 1032 188"/>
-          <path class="comet comet-ink-fast" d="M 1060 230 L 1060 488"/>
-          <path class="comet comet-leak" d="M 1032 533 Q 820 627 628 612"/>
-          <path class="comet comet-leak" d="M 572 612 Q 380 627 168 533"/>
-          <path class="comet comet-leak" d="M 140 488 L 140 232"/>
-        </g>
-
-        <!-- ============ PARTICLE LAYER — products + data flowing forward, dissolving on the leak ============ -->
+        <!-- ============ PARTICLE LAYER — single 8s narrative beat ============ -->
+        <!-- Sequencial: 1 partícula por arco. 6 arcos × ritmo unificado.
+             Slots de tempo (fração de 8s):
+             arc12 0.00→0.15  arc23 0.18→0.33  arc34 0.36→0.46
+             arc45 0.50→0.67  arc56 0.70→0.87  arc61 0.90→1.00 -->
         <g id="particleLayer">
-          <!-- arc12: indústria → distribuidor (ink product + lime data spark) -->
-          <circle r="3.6" fill="#0d0d0a">
-            <animateMotion dur="3.2s" begin="0s" repeatCount="indefinite" rotate="auto"><mpath href="#arc12"/></animateMotion>
-          </circle>
-          <circle r="2" fill="#cfff37" stroke="#0d0d0a" stroke-width=".6">
-            <animateMotion dur="3.2s" begin="1.6s" repeatCount="indefinite" rotate="auto"><mpath href="#arc12"/></animateMotion>
-          </circle>
-          <!-- arc23: distribuidor → lojista -->
-          <circle r="3.6" fill="#0d0d0a">
-            <animateMotion dur="3.2s" begin=".4s" repeatCount="indefinite" rotate="auto"><mpath href="#arc23"/></animateMotion>
-          </circle>
-          <circle r="2" fill="#cfff37" stroke="#0d0d0a" stroke-width=".6">
-            <animateMotion dur="3.2s" begin="2s" repeatCount="indefinite" rotate="auto"><mpath href="#arc23"/></animateMotion>
-          </circle>
-          <!-- arc34: pivot down (capture moment) -->
-          <circle r="3.6" fill="#0d0d0a">
-            <animateMotion dur="2.4s" begin="0s" repeatCount="indefinite"><mpath href="#arc34"/></animateMotion>
-          </circle>
-          <circle r="2" fill="#ff4a1c">
-            <animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite"><mpath href="#arc34"/></animateMotion>
+          <!-- arc12: indústria → distribuidor (ink) -->
+          <circle r="4.5" fill="#0d0d0a">
+            <animateMotion dur="8s" repeatCount="indefinite" rotate="auto"
+              keyTimes="0;.15;1" keyPoints="0;1;1" calcMode="linear">
+              <mpath href="#arc12"/>
+            </animateMotion>
+            <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.005;.15;.16;1" dur="8s" repeatCount="indefinite"/>
           </circle>
 
-          <!-- LEAK arc45: data dispersing — opacity + radius decay mid-path -->
-          <circle r="3.4" fill="#ff4a1c">
-            <animateMotion dur="5.4s" begin="0s" repeatCount="indefinite"><mpath href="#arc45"/></animateMotion>
-            <animate attributeName="opacity" values="0;.95;.85;.4;.1;0" keyTimes="0;.08;.45;.65;.85;1" dur="5.4s" repeatCount="indefinite"/>
-            <animate attributeName="r" values="3.4;3.4;2.8;1.8;.9;0" keyTimes="0;.08;.45;.65;.85;1" dur="5.4s" repeatCount="indefinite"/>
-          </circle>
-          <circle r="3" fill="#ff4a1c">
-            <animateMotion dur="5.4s" begin="2.4s" repeatCount="indefinite"><mpath href="#arc45"/></animateMotion>
-            <animate attributeName="opacity" values="0;.85;.7;.3;.05;0" keyTimes="0;.08;.45;.7;.9;1" dur="5.4s" repeatCount="indefinite"/>
-            <animate attributeName="r" values="3;3;2.4;1.4;.6;0" keyTimes="0;.08;.45;.7;.9;1" dur="5.4s" repeatCount="indefinite"/>
+          <!-- arc23: distribuidor → lojista (ink) -->
+          <circle r="4.5" fill="#0d0d0a">
+            <animateMotion dur="8s" repeatCount="indefinite" rotate="auto"
+              keyTimes="0;.18;.33;1" keyPoints="0;0;1;1" calcMode="linear">
+              <mpath href="#arc23"/>
+            </animateMotion>
+            <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;.175;.185;.33;.34;1" dur="8s" repeatCount="indefinite"/>
           </circle>
 
-          <!-- LEAK arc56: same dispersion -->
-          <circle r="3.4" fill="#ff4a1c">
-            <animateMotion dur="5.4s" begin=".8s" repeatCount="indefinite"><mpath href="#arc56"/></animateMotion>
-            <animate attributeName="opacity" values="0;.95;.65;.25;0" keyTimes="0;.1;.5;.8;1" dur="5.4s" repeatCount="indefinite"/>
-            <animate attributeName="r" values="3.4;3.4;2.4;1.2;0" keyTimes="0;.1;.5;.8;1" dur="5.4s" repeatCount="indefinite"/>
+          <!-- arc34: pivot down — captura, ink ainda -->
+          <circle r="4.5" fill="#0d0d0a">
+            <animateMotion dur="8s" repeatCount="indefinite"
+              keyTimes="0;.36;.46;1" keyPoints="0;0;1;1" calcMode="linear">
+              <mpath href="#arc34"/>
+            </animateMotion>
+            <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;.355;.365;.46;.47;1" dur="8s" repeatCount="indefinite"/>
           </circle>
 
-          <!-- LEAK arc61: closing — fragmento que mal chega -->
-          <circle r="3" fill="#ff4a1c">
-            <animateMotion dur="4.4s" begin="0s" repeatCount="indefinite"><mpath href="#arc61"/></animateMotion>
-            <animate attributeName="opacity" values="0;.85;.55;.15;0" keyTimes="0;.15;.55;.85;1" dur="4.4s" repeatCount="indefinite"/>
-            <animate attributeName="r" values="3;3;1.8;.7;0" keyTimes="0;.15;.55;.85;1" dur="4.4s" repeatCount="indefinite"/>
+          <!-- arc45: LEAK 04→05 (coral, dispersa) -->
+          <circle r="4.5" fill="#ff4a1c">
+            <animateMotion dur="8s" repeatCount="indefinite"
+              keyTimes="0;.50;.67;1" keyPoints="0;0;1;1" calcMode="linear">
+              <mpath href="#arc45"/>
+            </animateMotion>
+            <animate attributeName="opacity" values="0;0;1;.55;.1;0;0" keyTimes="0;.495;.505;.59;.66;.67;1" dur="8s" repeatCount="indefinite"/>
+            <animate attributeName="r"       values="4.5;4.5;4.5;3;1.2;0;0"  keyTimes="0;.495;.505;.59;.66;.67;1" dur="8s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- arc56: LEAK 05→06 (coral, fragmento) -->
+          <circle r="3.6" fill="#ff4a1c">
+            <animateMotion dur="8s" repeatCount="indefinite"
+              keyTimes="0;.70;.87;1" keyPoints="0;0;1;1" calcMode="linear">
+              <mpath href="#arc56"/>
+            </animateMotion>
+            <animate attributeName="opacity" values="0;0;.85;.45;.1;0;0" keyTimes="0;.695;.705;.79;.86;.87;1" dur="8s" repeatCount="indefinite"/>
+            <animate attributeName="r"       values="3.6;3.6;3.6;2.4;1;0;0" keyTimes="0;.695;.705;.79;.86;.87;1" dur="8s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- arc61: LEAK 06→01 (coral, mal chega) -->
+          <circle r="2.8" fill="#ff4a1c">
+            <animateMotion dur="8s" repeatCount="indefinite"
+              keyTimes="0;.90;1.00;1" keyPoints="0;0;1;1" calcMode="linear">
+              <mpath href="#arc61"/>
+            </animateMotion>
+            <animate attributeName="opacity" values="0;0;.7;.35;.1;0" keyTimes="0;.895;.905;.96;.99;1" dur="8s" repeatCount="indefinite"/>
+            <animate attributeName="r"       values="2.8;2.8;2.8;1.6;.6;0" keyTimes="0;.895;.905;.96;.99;1" dur="8s" repeatCount="indefinite"/>
           </circle>
         </g>
 
-        <!-- ============ RADAR RINGS — nodes pulsando como sinal ============ -->
+        <!-- ============ RADAR RINGS — pulsa quando a partícula chega ============
+             Nó 01 (origem): t=0     — pulse cobalt (saída)
+             Nó 02:           t=0.15  — pulse ink
+             Nó 03 CAPTURE:   t=0.33  — pulse cobalt FORTE (momento crítico)
+             Nó 04 LEAK:      t=0.46  — pulse coral (vira vermelho)
+             Nó 05:           t=0.67  — pulse coral fraco
+             Nó 06:           t=0.87  — pulse coral muito fraco -->
         <g id="radarRings">
-          <!-- nodes 0,1,2 — fluxo legítimo (cobalt + ink) -->
-          <circle cx="140" cy="200" r="9" fill="none" stroke="#1c34ff" stroke-width="1.2">
-            <animate attributeName="r" values="9;28;9" dur="2.6s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0;.55;0" dur="2.6s" repeatCount="indefinite"/>
+          <!-- nó 01: origem (cobalt) — pulse no início do ciclo -->
+          <circle cx="140" cy="200" r="9" fill="none" stroke="#1c34ff" stroke-width="1.4">
+            <animate attributeName="r"       values="9;9;28;9;9"        keyTimes="0;.005;.08;.15;1" dur="8s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;.7;.7;0;0"       keyTimes="0;.005;.08;.15;1" dur="8s" repeatCount="indefinite"/>
           </circle>
-          <circle cx="600" cy="110" r="7" fill="none" stroke="#0d0d0a" stroke-width="1">
-            <animate attributeName="r" values="7;22;7" dur="2.6s" begin=".7s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0;.4;0" dur="2.6s" begin=".7s" repeatCount="indefinite"/>
+
+          <!-- nó 02 (ink) -->
+          <circle cx="600" cy="110" r="9" fill="none" stroke="#0d0d0a" stroke-width="1.2">
+            <animate attributeName="r"       values="9;9;22;9;9"        keyTimes="0;.145;.21;.28;1" dur="8s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;.55;.55;0;0"     keyTimes="0;.145;.21;.28;1" dur="8s" repeatCount="indefinite"/>
           </circle>
-          <circle cx="1060" cy="200" r="9" fill="none" stroke="#1c34ff" stroke-width="1.2">
-            <animate attributeName="r" values="9;28;9" dur="2.6s" begin="1.4s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0;.55;0" dur="2.6s" begin="1.4s" repeatCount="indefinite"/>
+
+          <!-- nó 03 CAPTURE — cobalt FORTE (duplo ring) -->
+          <circle cx="1060" cy="200" r="9" fill="none" stroke="#1c34ff" stroke-width="1.8">
+            <animate attributeName="r"       values="9;9;36;9;9"        keyTimes="0;.325;.41;.49;1" dur="8s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;.9;.9;0;0"       keyTimes="0;.325;.41;.49;1" dur="8s" repeatCount="indefinite"/>
           </circle>
-          <!-- node 3 — momento da captura (coral, dois rings, mais forte) -->
-          <circle cx="1060" cy="520" r="9" fill="none" stroke="#ff4a1c" stroke-width="1.4">
-            <animate attributeName="r" values="9;36;9" dur="3.2s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0;.75;0" dur="3.2s" repeatCount="indefinite"/>
+          <circle cx="1060" cy="200" r="9" fill="none" stroke="#1c34ff" stroke-width="1">
+            <animate attributeName="r"       values="9;9;52;9;9"        keyTimes="0;.345;.45;.52;1" dur="8s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;.5;.5;0;0"       keyTimes="0;.345;.45;.52;1" dur="8s" repeatCount="indefinite"/>
           </circle>
-          <circle cx="1060" cy="520" r="9" fill="none" stroke="#ff4a1c" stroke-width="1">
-            <animate attributeName="r" values="9;52;9" dur="3.2s" begin=".9s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0;.4;0" dur="3.2s" begin=".9s" repeatCount="indefinite"/>
+
+          <!-- nó 04 — momento da virada coral -->
+          <circle cx="1060" cy="520" r="9" fill="none" stroke="#ff4a1c" stroke-width="1.6">
+            <animate attributeName="r"       values="9;9;30;9;9"        keyTimes="0;.455;.53;.62;1" dur="8s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;.85;.85;0;0"     keyTimes="0;.455;.53;.62;1" dur="8s" repeatCount="indefinite"/>
           </circle>
-          <!-- node 4 — sinal quebrado (dashed) -->
-          <circle cx="600" cy="610" r="6" fill="none" stroke="#ff4a1c" stroke-width="1" stroke-dasharray="3 3">
-            <animate attributeName="r" values="6;20;6" dur="2.4s" begin="1.2s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0;.5;0" dur="2.4s" begin="1.2s" repeatCount="indefinite"/>
+
+          <!-- nó 05 — sinal coral fraco -->
+          <circle cx="600" cy="610" r="9" fill="none" stroke="#ff4a1c" stroke-width="1.2" stroke-dasharray="3 3">
+            <animate attributeName="r"       values="9;9;22;9;9"        keyTimes="0;.665;.74;.82;1" dur="8s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;.55;.55;0;0"     keyTimes="0;.665;.74;.82;1" dur="8s" repeatCount="indefinite"/>
           </circle>
-          <!-- node 5 — sinal sumindo -->
-          <circle cx="140" cy="520" r="9" fill="none" stroke="#ff4a1c" stroke-width="1.2" stroke-dasharray="2 4">
-            <animate attributeName="r" values="9;30;9" dur="3s" begin=".4s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0;.55;0" dur="3s" begin=".4s" repeatCount="indefinite"/>
+
+          <!-- nó 06 — sinal morto -->
+          <circle cx="140" cy="520" r="9" fill="none" stroke="#ff4a1c" stroke-width="1" stroke-dasharray="2 4">
+            <animate attributeName="r"       values="9;9;18;9;9"        keyTimes="0;.865;.93;.99;1" dur="8s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;.4;.4;0;0"       keyTimes="0;.865;.93;.99;1" dur="8s" repeatCount="indefinite"/>
           </circle>
         </g>
 
-        <!-- ============ TX DEAD INDICATOR — top right, sinal morto ============ -->
-        <g id="txDead" class="tx-dead">
-          <rect x="978" y="40" width="186" height="38" fill="none" stroke="#ff4a1c" stroke-width=".8" stroke-dasharray="3 3"/>
-          <circle cx="998" cy="59" r="3.5" fill="#ff4a1c"/>
-          <text x="1016" y="56" font-family="JetBrains Mono" font-size="8.5" letter-spacing="2" fill="#ff4a1c">TX 03 → 06</text>
-          <text x="1016" y="69" font-family="JetBrains Mono" font-size="8.5" letter-spacing="2" fill="#ff4a1c" font-weight="700">NO SIGNAL</text>
+        <!-- ============ TX DEAD INDICATOR — pisca quando o coral chega "morto" em 06 ============ -->
+        <g id="txDead">
+          <g>
+            <!-- pulse durante arco 61 (t=.87→1.0); flicker 3 vezes nesse intervalo -->
+            <animate attributeName="opacity" values="0;0;1;.2;1;.2;1;0;0" keyTimes="0;.86;.88;.91;.93;.96;.98;.99;1" dur="8s" repeatCount="indefinite"/>
+            <rect x="978" y="40" width="186" height="38" fill="none" stroke="#ff4a1c" stroke-width=".8" stroke-dasharray="3 3"/>
+            <circle cx="998" cy="59" r="3.5" fill="#ff4a1c"/>
+            <text x="1016" y="56" font-family="JetBrains Mono" font-size="8.5" letter-spacing="2" fill="#ff4a1c">TX 03 → 06</text>
+            <text x="1016" y="69" font-family="JetBrains Mono" font-size="8.5" letter-spacing="2" fill="#ff4a1c" font-weight="700">NO SIGNAL</text>
+          </g>
         </g>
 
-        <!-- ============ LOST ZONE — banda fantasma central ============ -->
+        <!-- ============ LOST ZONE — visível apenas durante a fase de leak (t=.46 → 1.0) ============ -->
         <g id="lostZone">
-          <line x1="320" y1="488" x2="880" y2="488" stroke="#ff4a1c" stroke-width=".5" stroke-dasharray="1 6" opacity=".45"/>
-          <text class="glitch" x="600" y="476" text-anchor="middle" font-family="JetBrains Mono" font-size="9" letter-spacing="3.5" fill="#ff4a1c">↳ DADO PERDIDO ENTRE 03 E 06</text>
-          <text x="600" y="510" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="13" fill="#4a4a3d" opacity=".75">a indústria nunca recebe o sinal de volta</text>
-        </g>
-
-        <!-- ============ SCAN LINE — sweep editorial sutil ============ -->
-        <g id="scanFx">
-          <line class="scan-line" x1="60" y1="0" x2="1140" y2="0" stroke="#0d0d0a" stroke-width=".3" opacity=".18"/>
+          <g>
+            <!-- fade-in suave em .46, segura até .97, fade-out -->
+            <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;.45;.50;.97;1.0;1" dur="8s" repeatCount="indefinite"/>
+            <line x1="320" y1="488" x2="880" y2="488" stroke="#ff4a1c" stroke-width=".5" stroke-dasharray="1 6" opacity=".5"/>
+            <text x="600" y="476" text-anchor="middle" font-family="JetBrains Mono" font-size="9" letter-spacing="3.5" fill="#ff4a1c">↳ DADO PERDIDO ENTRE 03 E 06</text>
+            <text x="600" y="510" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="13" fill="#4a4a3d" opacity=".8">a indústria nunca recebe o sinal de volta</text>
+          </g>
         </g>
       </svg>
 
@@ -1215,13 +1219,11 @@ cycleTl
   .from('#centerStats > text:nth-child(5)', { opacity: 0, scale: .9, transformOrigin: 'center', duration: .55, ease: 'back.out(1.4)' }, 5.0)
   .from('#centerStats > text:nth-child(6)', { opacity: 0, y: 6, duration: .35, ease: 'power3.out' }, 5.25)
 
-  /* ============ MOTION LAYER REVEAL — overlays que dão vida ao diagrama ============ */
-  .to('#scanFx',       { opacity: 1, duration: 1.0, ease:'power2.out' }, 0)
-  .to('#cometLayer',   { opacity: 1, duration: 1.2, ease:'power2.out' }, 1.0)
+  /* ============ MOTION LAYER REVEAL — fade-in coordenado dos overlays ============ */
   .to('#particleLayer',{ opacity: 1, duration: 1.0, ease:'power2.out' }, 1.4)
   .to('#radarRings',   { opacity: 1, duration: 1.4, ease:'power2.out' }, 2.0)
-  .to('#txDead',       { opacity: 1, duration: .5,  ease:'power2.out' }, 2.05)
-  .to('#lostZone',     { opacity: 1, duration: .8,  ease:'power2.out' }, 3.6)
+  .to('#txDead',       { opacity: 1, duration: .5,  ease:'power2.out' }, 4.2)
+  .to('#lostZone',     { opacity: 1, duration: .8,  ease:'power2.out' }, 4.2)
   /* count-up dos números — punchline editorial */
   .call(() => countUp('stat-margin', 50, '+', 1.6), null, 4.4)
   .call(() => countUp('stat-share',  40, '−', 1.6), null, 5.0);
