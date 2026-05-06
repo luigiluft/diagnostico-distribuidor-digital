@@ -102,9 +102,11 @@
   /* buttons */
   .btn-acid{display:inline-flex;align-items:center;gap:.6rem;background:var(--ink);color:var(--acid);padding:1.05rem 1.4rem;font-weight:700;letter-spacing:-.01em;border:1px solid var(--ink);transition:all .25s}
   .btn-acid:hover{background:var(--acid);color:var(--ink);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
-  .btn-line{display:inline-flex;align-items:center;gap:.6rem;border:1px solid currentColor;padding:1.05rem 1.4rem;font-weight:600;transition:all .2s}
-  .btn-line:hover{background:currentColor;color:var(--paper)}
-  .ink-bg .btn-line:hover{color:var(--ink)}
+  .btn-line{display:inline-flex;align-items:center;gap:.6rem;border:1px solid var(--ink);color:var(--ink);padding:1.05rem 1.4rem;font-weight:600;transition:background .2s, color .2s, border-color .2s, transform .2s}
+  .btn-line:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  /* ink-bg context: ghost button on dark surface uses lime accent on hover */
+  .ink-bg .btn-line{border-color:rgba(236,228,207,.4);color:var(--on-ink)}
+  .ink-bg .btn-line:hover{background:var(--acid);color:var(--ink);border-color:var(--acid);box-shadow:6px 6px 0 var(--acid)}
 
   /* ticker */
   .marquee{display:flex;gap:0;white-space:nowrap;animation:mq 38s linear infinite}
@@ -402,28 +404,22 @@
         <text id="annot56" x="370" y="664" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="14" fill="#ff4a1c" opacity="0">−25% share digital</text>
         <text id="annot61" x="115" y="360" text-anchor="middle" transform="rotate(-90 115 360)" font-family="JetBrains Mono" font-size="10" letter-spacing="2.5" fill="#ff4a1c" opacity="0">↲ CICLO RECOMEÇA</text>
 
-        <!-- CENTER STATS — fill the void with the actual story -->
+        <!-- CENTER STATS — two distinct columns flanking the central legend -->
         <g id="centerStats" opacity="0">
-          <!-- left side: margin captured -->
-          <text x="345" y="300" text-anchor="middle" font-family="Fraunces" font-weight="200" font-size="86" fill="#ff4a1c" letter-spacing="-3" font-variation-settings="'opsz' 144,'SOFT' 100">+50%</text>
-          <text x="345" y="325" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" letter-spacing="2" fill="#4a4a3d">MARGEM CAPTURADA</text>
-          <text x="345" y="345" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="13" fill="#4a4a3d">pelo lojista que vira marca</text>
+          <!-- LEFT COLUMN — margin captured (coral) -->
+          <text x="345" y="288" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" letter-spacing="2" fill="#4a4a3d">MARGEM CAPTURADA</text>
+          <text x="345" y="358" text-anchor="middle" font-family="Fraunces" font-weight="200" font-size="86" fill="#ff4a1c" letter-spacing="-3" font-variation-settings="'opsz' 144,'SOFT' 100">+50%</text>
+          <text x="345" y="380" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="13" fill="#4a4a3d">pelo lojista que vira marca</text>
 
-          <!-- divider line -->
-          <line x1="500" y1="360" x2="700" y2="360" stroke="#1a1a14" stroke-width=".5" opacity=".25"/>
-
-          <!-- right side: share lost -->
-          <text x="855" y="430" text-anchor="middle" font-family="Fraunces" font-weight="200" font-size="86" fill="#0d0d0a" letter-spacing="-3" font-variation-settings="'opsz' 144,'SOFT' 100">−40%</text>
-          <text x="855" y="395" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" letter-spacing="2" fill="#4a4a3d">SHARE EVAPORADO</text>
-          <text x="855" y="450" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="13" fill="#4a4a3d">pela indústria, sem nem saber</text>
-
-          <!-- diagonal connecting line from "+50%" to "−40%" -->
-          <line x1="395" y1="320" x2="805" y2="408" stroke="#ff4a1c" stroke-width=".6" stroke-dasharray="2 4" opacity=".4"/>
+          <!-- RIGHT COLUMN — share evaporated (ink) -->
+          <text x="855" y="288" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" letter-spacing="2" fill="#4a4a3d">SHARE EVAPORADO</text>
+          <text x="855" y="358" text-anchor="middle" font-family="Fraunces" font-weight="200" font-size="86" fill="#0d0d0a" letter-spacing="-3" font-variation-settings="'opsz' 144,'SOFT' 100">−40%</text>
+          <text x="855" y="380" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="13" fill="#4a4a3d">pela indústria, sem nem saber</text>
         </g>
 
-        <!-- central legend -->
-        <text id="lblFlow" x="600" y="345" text-anchor="middle" font-family="JetBrains Mono" font-size="11" letter-spacing="3" fill="#0d0d0a" opacity="0">FLUXO LEGÍTIMO →</text>
-        <text id="lblLeak" x="600" y="395" text-anchor="middle" font-family="JetBrains Mono" font-size="11" letter-spacing="3" fill="#ff4a1c" opacity="0">← VAZAMENTO SILENCIOSO</text>
+        <!-- central legend (between the two stat columns, no overlap) -->
+        <text id="lblFlow" x="600" y="320" text-anchor="middle" font-family="JetBrains Mono" font-size="11" letter-spacing="3" fill="#0d0d0a" opacity="0">FLUXO LEGÍTIMO →</text>
+        <text id="lblLeak" x="600" y="408" text-anchor="middle" font-family="JetBrains Mono" font-size="11" letter-spacing="3" fill="#ff4a1c" opacity="0">← VAZAMENTO SILENCIOSO</text>
 
         <!-- node dots: anchors for the arrows. Each arrow ends near these -->
         <circle class="node-dot" data-i="0" cx="140" cy="200" r="6" fill="#1c34ff" opacity="0"/>
